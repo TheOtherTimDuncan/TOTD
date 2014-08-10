@@ -43,6 +43,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="EnumerableHelpers\EnumerableExtensions.cs" />
+    <Compile Include="ExceptionHelpers\ThrowIf.cs" />
     <Compile Include="Misc\Enumeration.cs" />
     <Compile Include="Misc\NullHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
