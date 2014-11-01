@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TOTD.Utility.StringHelpers;
  
 namespace TOTD.Utility.ExceptionHelpers
 {
@@ -11,6 +12,14 @@ namespace TOTD.Utility.ExceptionHelpers
             public static void IsNull(object argument, string argumentName)
             {
                 if (argument == null)
+                {
+                    throw new ArgumentNullException(argumentName);
+                }
+            }
+
+            public static void IsNullOrEmpty(string argument, string argumentName)
+            {
+                if (argument.IsNullOrEmpty())
                 {
                     throw new ArgumentNullException(argumentName);
                 }

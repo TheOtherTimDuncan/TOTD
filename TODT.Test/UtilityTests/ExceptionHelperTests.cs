@@ -26,6 +26,29 @@ namespace TODT.Test.UtilityTests
             }
 
             [TestMethod]
+            public void IsNullOrEmptyDoesNotThrowExceptionForNonNullAndNonEmptyValue()
+            {
+                string argument = "test";
+                ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(ArgumentNullException))]
+            public void IsNullOrEmptyThrowsExceptionForNullValue()
+            {
+                string argument = null;
+                ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(ArgumentNullException))]
+            public void IsNullOrEmptyThrowsExceptionForEmptyValue()
+            {
+                string argument = "";
+                ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+            }
+
+            [TestMethod]
             public void IsLessThanDoesNotThrowExceptionIfArgumentExceedsValue()
             {
                 int argument = 1;
