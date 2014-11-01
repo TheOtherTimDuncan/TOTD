@@ -56,6 +56,7 @@
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />
     <Compile Include="UtilityTests\EnumerationTests.cs" />
     <Compile Include="UtilityTests\ExceptionHelperTests.cs" />
+    <Compile Include="UtilityTests\ShortGuidTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TOTD.Utility\TOTD.Utility.csproj">

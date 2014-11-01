@@ -46,6 +46,7 @@
     <Compile Include="ExceptionHelpers\ThrowIf.cs" />
     <Compile Include="Misc\Enumeration.cs" />
     <Compile Include="Misc\NullHelper.cs" />
+    <Compile Include="Misc\ShortGuid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringHelpers\StringExtensions.cs" />
   </ItemGroup>
