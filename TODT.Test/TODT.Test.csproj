@@ -94,6 +94,7 @@
     <Compile Include="UtilityTests\EnumerationTests.cs" />
     <Compile Include="UtilityTests\ExceptionHelperTests.cs" />
     <Compile Include="UtilityTests\ShortGuidTests.cs" />
+    <Compile Include="UtilityTests\UnitTestHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TOTD.Mvc\TOTD.Mvc.csproj">
