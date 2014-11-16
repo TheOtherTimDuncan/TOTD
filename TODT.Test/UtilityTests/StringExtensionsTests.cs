@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TOTD.Utility.StringHelpers;
 
@@ -16,19 +17,25 @@ namespace TODT.Test.UtilityTests
             public void ReturnsTrueForNullValue()
             {
                 string test = null;
-                Assert.IsTrue(test.IsNullOrEmpty());
+                test.IsNullOrEmpty()
+                    .Should()
+                    .BeTrue("because string value is null");
             }
 
             [TestMethod]
             public void ReturnsTrueForEmptyValue()
             {
-                Assert.IsTrue(string.Empty.IsNullOrEmpty());
+                string.Empty.IsNullOrEmpty()
+                    .Should()
+                    .BeTrue("string value is empty string");
             }
 
             [TestMethod]
             public void ReturnsFalseForTextValue()
             {
-                Assert.IsFalse("test".IsNullOrEmpty());
+                "test".IsNullOrEmpty()
+                    .Should()
+                    .BeFalse("string value is not null or empty");
             }
         }
 
@@ -39,25 +46,33 @@ namespace TODT.Test.UtilityTests
             public void ReturnsTrueForNullValue()
             {
                 string test = null;
-                Assert.IsTrue(test.IsNullOrWhiteSpace());
+                test.IsNullOrWhiteSpace()
+                    .Should()
+                    .BeTrue("string value is null");
             }
 
             [TestMethod]
             public void ReturnsTrueForEmptyValue()
             {
-                Assert.IsTrue(string.Empty.IsNullOrWhiteSpace());
+                string.Empty.IsNullOrWhiteSpace()
+                    .Should()
+                    .BeTrue("string value is an empty string");
             }
 
             [TestMethod]
             public void ReturnsFalseForTextValue()
             {
-                Assert.IsFalse("test".IsNullOrWhiteSpace());
+                "test".IsNullOrWhiteSpace()
+                    .Should()
+                    .BeFalse("string value is not null, empty or whitespace");
             }
 
             [TestMethod]
             public void ReturnsTrueForWhiteSpace()
             {
-                Assert.IsTrue(" ".IsNullOrWhiteSpace());
+                " ".IsNullOrWhiteSpace()
+                    .Should()
+                    .BeTrue("string value is whitespace");
             }
         }
 
@@ -67,26 +82,34 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void ReturnsTrueForEqualStrings()
             {
-                Assert.IsTrue("Test".SafeEquals("Test"));
+                "Test".SafeEquals("Test")
+                    .Should()
+                    .BeTrue("string values are the same");
             }
 
             [TestMethod]
             public void ReturnsFalseForNonEqualStrings()
             {
-                Assert.IsFalse("Test".SafeEquals("Not Test"));
+                "Test".SafeEquals("Not Test")
+                    .Should()
+                    .BeFalse("string values are different");
             }
 
             [TestMethod]
             public void ReturnsFalseIfUsingNullString()
             {
                 string test = null;
-                Assert.IsFalse(test.SafeEquals("Test"));
+                test.SafeEquals("test")
+                    .Should()
+                    .BeFalse("null comparison should be false and not throw an exception");
             }
 
             [TestMethod]
             public void DefaultsToCaseInsensitiveComparison()
             {
-                Assert.IsTrue("Test".SafeEquals("TEST"));
+                "Test".SafeEquals("TEST")
+                    .Should()
+                    .BeTrue("string comparison is case-insensitive by default");
             }
         }
 
@@ -97,13 +120,17 @@ namespace TODT.Test.UtilityTests
             public void ReturnsNullForNull()
             {
                 string test = null;
-                Assert.IsNull(test.SafeTrim());
+                test.SafeTrim()
+                    .Should()
+                    .BeNull("trimming a null string should return null instead of throwing an exception");
             }
 
             [TestMethod]
             public void ReturnsTrimmedString()
             {
-                Assert.AreEqual("Test", "  Test  ".SafeTrim());
+                "  Test  ".SafeTrim()
+                    .Should()
+                    .Be("Test", "original Trim should still work");
             }
         }
     }

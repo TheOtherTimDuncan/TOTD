@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TOTD.Utility.ExceptionHelpers;
+using FluentAssertions;
 
 namespace TODT.Test.UtilityTests
 {
@@ -13,61 +14,110 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void IsNullDoesNotThrowExceptionForNonNullValue()
             {
-                string argument = "test";
-                ThrowIf.Argument.IsNull(argument, "argument");
+                Action action = () =>
+                {
+                    string argument = "test";
+                    ThrowIf.Argument.IsNull(argument, "argument");
+                };
+                action.ShouldNotThrow("test argument is not null");
             }
 
             [TestMethod]
-            [ExpectedException(typeof(ArgumentNullException))]
             public void IsNullThrowsExceptionForNullValue()
             {
-                string argument = null;
-                ThrowIf.Argument.IsNull(argument, "argument");
+                Action action = () =>
+                {
+                    string argument = null;
+                    ThrowIf.Argument.IsNull(argument, "argument");
+                };
+                action
+                    .ShouldThrow<ArgumentNullException>()
+                    .And
+                    .ParamName
+                        .Should()
+                        .Be("argument");
             }
 
             [TestMethod]
             public void IsNullOrEmptyDoesNotThrowExceptionForNonNullAndNonEmptyValue()
             {
-                string argument = "test";
-                ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+                Action action = () =>
+                {
+                    string argument = "test";
+                    ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+                };
+                action.ShouldNotThrow("argument has value");
             }
 
             [TestMethod]
-            [ExpectedException(typeof(ArgumentNullException))]
             public void IsNullOrEmptyThrowsExceptionForNullValue()
             {
-                string argument = null;
-                ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+                Action action = () =>
+                {
+                    string argument = null;
+                    ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+                };
+                action
+                    .ShouldThrow<ArgumentNullException>("argument value is null")
+                    .And
+                    .ParamName
+                        .Should()
+                        .Be("argument");
             }
 
             [TestMethod]
-            [ExpectedException(typeof(ArgumentNullException))]
             public void IsNullOrEmptyThrowsExceptionForEmptyValue()
             {
-                string argument = "";
-                ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+                Action action = () =>
+                {
+                    string argument = "";
+                    ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
+                };
+                action
+                    .ShouldThrow<ArgumentNullException>("argument is empty string")
+                    .And
+                    .ParamName
+                        .Should()
+                        .Be("argument");
             }
 
             [TestMethod]
             public void IsLessThanDoesNotThrowExceptionIfArgumentExceedsValue()
             {
-                int argument = 1;
-                ThrowIf.Argument.IsLessThan(argument, "argument", 0);
+                Action action = () =>
+                {
+                    int argument = 1;
+                    ThrowIf.Argument.IsLessThan(argument, "argument", 0);
+                };
+                action.ShouldNotThrow("argument value is not less than limit");
+
             }
 
             [TestMethod]
             public void IsLessThanDoesNotThrowExceptionIfArgumentEqualsValue()
             {
-                int argument = 0;
-                ThrowIf.Argument.IsLessThan(argument, "argument", 0);
+                Action action = () =>
+                {
+                    int argument = 0;
+                    ThrowIf.Argument.IsLessThan(argument, "argument", 0);
+                };
+                action.ShouldNotThrow("argument value is not less than limit");
             }
 
             [TestMethod]
-            [ExpectedException(typeof(ArgumentOutOfRangeException))]
             public void IsLessThrowsExceptionIfArgumentIsLessThanValue()
             {
-                int argument = -1;
-                ThrowIf.Argument.IsLessThan(argument, "argument", 0);
+                Action action = () =>
+                {
+                    int argument = -1;
+                    ThrowIf.Argument.IsLessThan(argument, "argument", 0);
+                };
+                action
+                    .ShouldThrow<ArgumentOutOfRangeException>("argument value is less than limit")
+                    .And
+                    .ParamName
+                        .Should()
+                        .Be("argument");
             }
         }
     }

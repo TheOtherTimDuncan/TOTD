@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TOTD.Utility.EnumerableHelpers;
 using TOTD.Utility.StringHelpers;
+using FluentAssertions;
 
 namespace TODT.Test.UtilityTests
 {
@@ -16,21 +17,25 @@ namespace TODT.Test.UtilityTests
             public void ReturnsTrueIfNull()
             {
                 IEnumerable<int> nullTest = null;
-                Assert.IsTrue(nullTest.IsNullOrEmpty());
+                nullTest.IsNullOrEmpty().Should().BeTrue("source is null");
             }
 
             [TestMethod]
             public void ReturnsTrueIfEmpty()
             {
-                List<int> emptyTest = new List<int>();
-                Assert.IsTrue(emptyTest.IsNullOrEmpty());
+                new List<int>()
+                    .IsNullOrEmpty()
+                        .Should()
+                        .BeTrue("source is empty");
             }
 
             [TestMethod]
             public void ReturnsFalseIfNotEmpty()
             {
-                int[] notEmptyTest = new int[] { 1, 2 };
-                Assert.IsFalse(notEmptyTest.IsNullOrEmpty());
+                new int[] { 1, 2 }
+                    .IsNullOrEmpty()
+                        .Should()
+                        .BeFalse("source is not empty or null");
             }
         }
 
@@ -40,29 +45,23 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void ReturnsCorrectPage()
             {
-                IEnumerable<int> test = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-                int[] result = test.TakePage(2, 5).ToArray();
-                Assert.AreEqual(5, result.Length);
-                Assert.AreEqual(6, result[0]);
-                Assert.AreEqual(7, result[1]);
-                Assert.AreEqual(8, result[2]);
-                Assert.AreEqual(9, result[3]);
-                Assert.AreEqual(10, result[4]);
+                new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }
+                    .TakePage(2, 5)
+                        .Should()
+                        .HaveCount(5, "because page size is 5")
+                        .And
+                        .Equal(new int[] { 6, 7, 8, 9, 10 }, "because 5 elements starting at element 2 were asked for");
             }
 
             [TestMethod]
             public void ThrowsExceptionForNullSource()
             {
-                try
+                Action testaction = () =>
                 {
                     IEnumerable<int> test = null;
                     IEnumerable<int> result = test.TakePage(1, 10);
-                    Assert.Fail("Exception not thrown");
-                }
-                catch (ArgumentNullException ex)
-                {
-                    Assert.AreEqual("source", ex.ParamName);
-                }
+                };
+                testaction.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("source");
             }
         }
 
@@ -72,22 +71,28 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void ReturnsTrueIfContainsElement()
             {
-                IEnumerable<int> test = new int[] { 1, 2, 3 };
-                Assert.IsTrue(test.NullSafeAny(x => x == 1));
+                new int[] { 1, 2, 3 }
+                    .NullSafeAny(x => x == 1)
+                        .Should()
+                        .BeTrue("original Any still works");
             }
 
             [TestMethod]
             public void ReturnsFalseIfNotContainsElement()
             {
-                IEnumerable<int> test = new int[] { 1, 2, 3 };
-                Assert.IsFalse(test.NullSafeAny(x => x == 9));
+                new int[] { 1, 2, 3 }
+                    .NullSafeAny(x => x == 9)
+                        .Should()
+                        .BeFalse("original Any still works");
             }
 
             [TestMethod]
             public void ReturnsFalseForNull()
             {
                 IEnumerable<int> test = null;
-                Assert.IsFalse(test.NullSafeAny(x => x == 1));
+                test.NullSafeAny(x => x == 1)
+                    .Should()
+                    .BeFalse("null source should return false instead of throw exception");
             }
         }
 
@@ -98,16 +103,18 @@ namespace TODT.Test.UtilityTests
             public void ReturnsEmptySequenceIfNull()
             {
                 IEnumerable<int> test = null;
-                IEnumerable<int> result = test.NullSafeWhere(x => x == 1);
-                Assert.IsTrue(result.Count() == 0);
+                test.NullSafeWhere(x => x == 1)
+                    .Should()
+                    .HaveCount(0, "should return empty sequence from null source instead of throwing exception");
             }
 
             [TestMethod]
             public void ReturnsMatchingSequenceIfNotNull()
             {
-                IEnumerable<int> test = new int[] { 1, 2, 3 };
-                IEnumerable<int> result = test.NullSafeWhere(x => x >= 2);
-                Assert.IsTrue(result.Count() == 2);
+                new int[] { 1, 2, 3 }
+                    .NullSafeWhere(x => x >= 2)
+                    .Should()
+                    .Equal(new int[] { 2, 3 }, "original Where still works");
             }
         }
 
@@ -118,44 +125,37 @@ namespace TODT.Test.UtilityTests
             public void ReturnsEmptySequenceIfNull()
             {
                 IEnumerable<int> test = null;
-                IEnumerable<int> result = test.NullSafeSelect(x => x * 2);
-                Assert.IsTrue(result.Count() == 0);
-                Assert.AreEqual(0, result.Sum());
+                test.NullSafeSelect(x => x * 2)
+                    .Should()
+                    .HaveCount(0, "should return empty sequence from null source instead of throwing exception");
+
             }
 
             [TestMethod]
             public void ReturnsSequenceIfNotNull()
             {
-                IEnumerable<int> test = new int[] { 1, 2, 3 };
-                IEnumerable<int> result = test.NullSafeSelect(x => x * 2);
-                Assert.IsTrue(result.Count() == 3);
-                Assert.AreEqual(12, result.Sum());
+                new int[] { 1, 2, 3 }
+                    .NullSafeSelect(x => x * 2)
+                    .Should()
+                    .Equal(new int[] { 2, 4, 6 }, "original Select still works");
             }
         }
 
         [TestClass]
         public class BatchMethod
         {
-            public IEnumerable<int> BuildSequence()
-            {
-                for (int i = 1; i <= 100; i++)
-                {
-                    yield return i;
-                }
-            }
-
             [TestMethod]
             public void ExecutesSequenceInBatches()
             {
-                IEnumerable<int> sequence = BuildSequence();
+                IEnumerable<int> sequence = Enumerable.Range(1, 100);
                 int value = 1;
                 sequence.BatchForEach(10, (batch) =>
                 {
-                    Assert.AreEqual(10, batch.Count());
+                    batch.Should().HaveCount(10, "batch size is 10");
 
                     foreach (int i in batch)
                     {
-                        Assert.AreEqual(value, i);
+                        i.Should().Be(value);
                         value++;
                     }
                 });
@@ -169,14 +169,18 @@ namespace TODT.Test.UtilityTests
             public void Returns0ForNullSequence()
             {
                 IEnumerable<int> sequence = null;
-                Assert.AreEqual(0, sequence.NullSafeCount());
+                sequence.NullSafeCount()
+                    .Should()
+                    .Be(0, "should return 0 for null sequence instead of throwing exception");
             }
 
             [TestMethod]
             public void ReturnsCorrectCountForNonNullSequence()
             {
-                IEnumerable<int> sequence = new int[] { 1, 2, 3 };
-                Assert.AreEqual(3, sequence.NullSafeCount());
+                new int[] { 1, 2, 3 }
+                    .NullSafeCount()
+                    .Should()
+                    .Be(3, "original Count still works");
             }
         }
     }

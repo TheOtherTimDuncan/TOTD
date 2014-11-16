@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TOTD.Utility.Misc;
 
@@ -28,24 +29,24 @@ namespace TODT.Test.UtilityTests
         [TestMethod]
         public void GetAllReturnsAllFields()
         {
-            IEnumerable<TestEnumeration> all = TestEnumeration.GetAll();
-            Assert.AreEqual(2, all.Count());
-            Assert.IsTrue(all.Any(x => x.Value == TestEnumeration.Value1.Value && x.DisplayName == TestEnumeration.Value1.DisplayName));
-            Assert.IsTrue(all.Any(x => x.Value == TestEnumeration.Value2.Value && x.DisplayName == TestEnumeration.Value2.DisplayName));
+            TestEnumeration.GetAll()
+                .Should()
+                .Equal(new TestEnumeration[] { TestEnumeration.Value1, TestEnumeration.Value2 });
         }
 
         [TestMethod]
         public void ReturnsCorrectFieldFromValue()
         {
-            TestEnumeration result = TestEnumeration.FromValue(0);
-            Assert.AreEqual(0, result.Value);
+            TestEnumeration.FromValue(0).Value
+                .Should()
+                .Be(0, "FromValue should return TestEnumeration.Value1");
         }
 
         [TestMethod]
         public void ReturnsCorrectFieldFromDisplayName()
         {
-            TestEnumeration result = TestEnumeration.FromDisplayName("Value 1");
-            Assert.AreEqual("Value 1", result.DisplayName);
+            TestEnumeration.FromDisplayName("Value 1").DisplayName
+                .Should().Be("Value 1", "FromDisplayName should return TestEnumeration.Value1");
         }
     }
 }

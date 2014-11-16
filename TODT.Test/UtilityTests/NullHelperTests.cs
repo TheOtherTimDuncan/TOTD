@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TOTD.Utility.Misc;
 
@@ -26,7 +27,9 @@ namespace TODT.Test.UtilityTests
             public void ReturnsNullIfSourceIsNull()
             {
                 TestClass testClass = null;
-                Assert.IsNull(testClass.IfNotNull(x => x.TestProperty));
+                testClass.IfNotNull(x => x.TestProperty)
+                    .Should()
+                    .BeNull("source class is null and referencing property should not throw an exception");
             }
 
             [TestMethod]
@@ -34,14 +37,18 @@ namespace TODT.Test.UtilityTests
             {
                 TestClass testClass = new TestClass();
                 testClass.TestProperty = "test";
-                Assert.AreEqual(testClass.TestProperty, testClass.IfNotNull(x => x.TestProperty));
+                testClass.IfNotNull(x => x.TestProperty)
+                    .Should()
+                    .Be(testClass.TestProperty, "source class is not null");
             }
 
             [TestMethod]
             public void ReturnsSpecifiedValueIfNull()
             {
                 TestClass testClass = null;
-                Assert.AreEqual("test", testClass.IfNotNull(x => x.TestProperty, "test"));
+                testClass.IfNotNull(x => x.TestProperty, "test")
+                    .Should()
+                    .Be("test", "source class is null and a default value is specified");
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TOTD.Utility.Misc;
 
@@ -12,7 +13,7 @@ namespace TODT.Test.UtilityTests
         {
             Guid guid = Guid.NewGuid();
             ShortGuid shortguid = guid;
-            Assert.AreEqual(guid, shortguid.Guid);
+            shortguid.Guid.Should().Be(guid);
         }
     }
 }
