@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Tim Duncan</authors>
+    <description>None</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014</copyright>
+  </metadata>
+</package>
