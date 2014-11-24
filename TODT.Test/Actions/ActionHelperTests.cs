@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TODT.Test.Fakes;
 using TOTD.Mvc.Actions;
 
-namespace CH.Test
+namespace TOTD.Test
 {
     [TestClass]
     public class ActionHelperTests
@@ -16,7 +18,7 @@ namespace CH.Test
             RouteValueDictionary routeValues = new RouteValueDictionary();
             routeValues.Add("area", "NoArea");
 
-            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction(1), routeValues);
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithArea>(x => x.TestAction(1), routeValues);
 
             Assert.AreEqual("NoArea", helperResult.RouteValues["area"]);
         }
@@ -24,14 +26,14 @@ namespace CH.Test
         [TestMethod]
         public void GetsAreaFromAttributeOnController()
         {
-            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction(1));
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithArea>(x => x.TestAction(1));
             Assert.AreEqual("TestArea", helperResult.RouteValues["area"]);
         }
 
         [TestMethod]
         public void SetsAreaToEmptyStringByDefault()
         {
-            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithoutArea>(x => x.OtherAction());
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.OtherAction());
             Assert.AreEqual("", helperResult.RouteValues["area"]);
         }
 
@@ -47,6 +49,13 @@ namespace CH.Test
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction(1));
             Assert.AreEqual("TestAction", helperResult.ActionName);
+        }
+
+        [TestMethod]
+        public void CanGetActionNameFromAsyncMethod()
+        {
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestActionAsync(1));
+            Assert.AreEqual("TestActionAsync", helperResult.ActionName);
         }
 
         [TestMethod]
@@ -69,28 +78,6 @@ namespace CH.Test
             }
             watch.Stop();
             Console.WriteLine("Total time: {0}; Average time: {1}", watch.ElapsedMilliseconds, (double)watch.ElapsedMilliseconds / max);
-        }
-
-        [RouteArea("TestArea")]
-        public class TestController : Controller
-        {
-            public ActionResult TestAction(int actionID)
-            {
-                return null;
-            }
-
-            public ActionResult DifferentAction(string test)
-            {
-                return null;
-            }
-        }
-
-        public class TestControllerWithoutArea : Controller
-        {
-            public ActionResult OtherAction()
-            {
-                return null;
-            }
         }
     }
 }

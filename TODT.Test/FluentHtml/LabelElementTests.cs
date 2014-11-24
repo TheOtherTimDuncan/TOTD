@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using TOTD.Mvc.FluentHtml;
-using TOTD.Mvc.FluentHtml.Elements;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TOTD.Mvc.FluentHtml;
+using TOTD.Mvc.FluentHtml.Elements;
 
-namespace CH.Test.FluentHtml
+namespace TOTD.Test.FluentHtml
 {
     [TestClass]
     public class LabelElementTests : BaseFormElementTests

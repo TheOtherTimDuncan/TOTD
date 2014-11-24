@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using TOTD.Mvc.FluentHtml.Elements;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TODT.Test.Fakes;
+using TOTD.Mvc.FluentHtml.Elements;
 
-namespace CH.Test.FluentHtml
+namespace TOTD.Test.FluentHtml
 {
     [TestClass]
     public class FormElementTests : BaseElementTests
@@ -72,6 +73,22 @@ namespace CH.Test.FluentHtml
                 .Contain("method=\"post\"", because: "post is the default")
                 .And
                 .Contain("action=\"/Test/FormAction?returnUrl=returnUrl\"", because: "this is the url for the controller action")
+                .And
+                .EndWith("></form>");
+        }
+
+        [TestMethod]
+        public void CorrectlySetsFormActionToControllerAsyncAction()
+        {
+            new FormElement(GetHtmlHelper())
+                .Action<TestController>(x => x.TestActionAsync(1))
+                .ToHtmlString()
+                .Should()
+                .StartWith("<form")
+                .And
+                .Contain("method=\"post\"", because: "post is the default")
+                .And
+                .Contain("action=\"/Test/TestActionAsync?actionID=1\"", because: "this is the url for the controller action")
                 .And
                 .EndWith("></form>");
         }

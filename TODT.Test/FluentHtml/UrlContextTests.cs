@@ -1,9 +1,9 @@
 ﻿using System;
-using TOTD.Mvc.FluentHtml;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TOTD.Mvc.FluentHtml;
 
-namespace CH.Test.FluentHtml
+namespace TOTD.Test.FluentHtml
 {
     [TestClass]
     public class UrlContextTests

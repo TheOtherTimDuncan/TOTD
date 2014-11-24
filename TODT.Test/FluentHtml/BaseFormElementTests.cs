@@ -3,13 +3,13 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using TOTD.Mvc.FluentHtml;
-using TOTD.Mvc.FluentHtml.Elements;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using TOTD.Mvc.FluentHtml;
+using TOTD.Mvc.FluentHtml.Elements;
 
-namespace CH.Test.FluentHtml
+namespace TOTD.Test.FluentHtml
 {
     [TestClass]
     public class BaseFormElementTests : BaseElementTests

@@ -92,10 +92,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Actions\ActionExtensionTests.cs" />
     <Compile Include="Actions\ActionHelperTests.cs" />
+    <Compile Include="Fakes\TestController.cs" />
+    <Compile Include="Fakes\TestControllerWithArea.cs" />
     <Compile Include="FluentHtml\BaseElementTests.cs" />
     <Compile Include="FluentHtml\BaseFormElementTests.cs" />
-    <Compile Include="FluentHtml\BaseHtmlTest.cs" />
+    <Compile Include="BaseHtmlTest.cs" />
     <Compile Include="FluentHtml\FormElementTests.cs" />
     <Compile Include="FluentHtml\InputButtonElementTests.cs" />
     <Compile Include="FluentHtml\InputCheckboxElementTests.cs" />

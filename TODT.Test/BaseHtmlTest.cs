@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TOTD.Utility.StringHelpers;
 
-namespace CH.Test.FluentHtml
+namespace TOTD.Test
 {
     public class BaseHtmlTest
     {
@@ -77,19 +77,6 @@ namespace CH.Test.FluentHtml
             mockHttpContext.Setup(o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => r);
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());
             return mockHttpContext.Object;
-        }
-    }
-
-    public class TestController : Controller
-    {
-        public ActionResult TestAction(int actionID)
-        {
-            return null;
-        }
-
-        public ActionResult FormAction(string returnUrl)
-        {
-            return null;
         }
     }
 }

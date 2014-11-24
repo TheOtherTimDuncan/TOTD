@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using TOTD.Mvc.Actions;
 using TOTD.Mvc.FluentHtml.Contracts;
@@ -17,6 +18,13 @@ namespace TOTD.Mvc.FluentHtml.Elements
             // Set defaults
             Method(FormMethod.Post);
             Action(this.CurrentActionName, this.CurrentControllerName);
+        }
+
+        public FormElement Action<T>(Expression<Func<T, Task<ActionResult>>> actionSelector) where T : IController
+        {
+            ActionHelperResult actionResult = ActionHelper.GetRouteValues(actionSelector);
+            string url = UrlHelper.Action(actionResult.ActionName, actionResult.ControllerName, actionResult.RouteValues);
+            return Action(url);
         }
 
         public FormElement Action<T>(Expression<Func<T, ActionResult>> actionSelector) where T : IController

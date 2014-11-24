@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using TOTD.Mvc.FluentHtml.Elements;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TODT.Test.Fakes;
+using TOTD.Mvc.FluentHtml.Elements;
 
-namespace CH.Test.FluentHtml
+namespace TOTD.Test.FluentHtml
 {
     [TestClass]
     public class LinkElementTests : BaseHtmlTest
@@ -66,6 +67,16 @@ namespace CH.Test.FluentHtml
                 .ToHtmlString()
                 .Should()
                 .Be("<a href=\"/Test/TestAction?actionID=1\"></a>");
+        }
+
+        [TestMethod]
+        public void CorrectlySetsUrlFromControllerAsyncAction()
+        {
+            new LinkElement(GetHtmlHelper())
+                .ActionLink<TestController>(x => x.TestActionAsync(1))
+                .ToHtmlString()
+                .Should()
+                .Be("<a href=\"/Test/TestActionAsync?actionID=1\"></a>");
         }
     }
 }
