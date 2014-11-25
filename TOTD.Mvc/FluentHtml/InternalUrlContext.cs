@@ -62,7 +62,7 @@ namespace TOTD.Mvc.FluentHtml
 
         private static string GetAreaFromRouteValues(RouteValueDictionary routeValues)
         {
-            return routeValues[RouteDataKeys.Area] as string;
+            return routeValues[RouteValueKeys.Area] as string;
         }
     }
 }

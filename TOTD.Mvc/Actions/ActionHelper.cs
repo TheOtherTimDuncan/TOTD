@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using TOTD.Mvc.FluentHtml;
 
 namespace TOTD.Mvc.Actions
 {
@@ -92,9 +93,9 @@ namespace TOTD.Mvc.Actions
             }
 
             // Only set the area if it is not already there
-            if (!result.RouteValues.ContainsKey("area"))
+            if (!result.RouteValues.ContainsKey(RouteValueKeys.Area))
             {
-                result.RouteValues.Add("area", areaName);
+                result.RouteValues.Add(RouteValueKeys.Area, areaName);
             }
 
             // Action name is the name of the method being called
@@ -127,7 +128,19 @@ namespace TOTD.Mvc.Actions
                     }
                     if (parameterValue != null)
                     {
-                        result.RouteValues.Add(parameterName, parameterValue);
+                        Type parameterType = parameterValue.GetType();
+                        if (parameterType.IsClass && parameterType != typeof(string))
+                        {
+                            RouteValueDictionary modelValues = new RouteValueDictionary(parameterValue);
+                            foreach (KeyValuePair<string, object> routeValue in modelValues)
+                            {
+                                result.RouteValues.Add(routeValue.Key, routeValue.Value);
+                            }
+                        }
+                        else
+                        {
+                            result.RouteValues.Add(parameterName, parameterValue);
+                        }
                     }
                 }
             }

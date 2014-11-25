@@ -2,7 +2,7 @@
 
 namespace TOTD.Mvc.FluentHtml
 {
-    public static class RouteDataKeys
+    public static class RouteValueKeys
     {
         public const string Controller = "controller";
         public const string Action = "action";

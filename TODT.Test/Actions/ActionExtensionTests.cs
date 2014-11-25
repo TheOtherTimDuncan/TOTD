@@ -9,6 +9,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TODT.Test.Fakes;
 using TOTD.Mvc.Actions;
+using TOTD.Mvc.FluentHtml;
 
 namespace TOTD.Test.Actions
 {
@@ -18,8 +19,8 @@ namespace TOTD.Test.Actions
         public UrlHelper GetUrlHelper()
         {
             RouteData routeData = new RouteData();
-            routeData.Values["controller"] = "test";
-            routeData.Values["action"] = "action";
+            routeData.Values[RouteValueKeys.Controller] = "test";
+            routeData.Values[RouteValueKeys.Action] = "action";
 
             return new UrlHelper(new RequestContext(GetHttpContext(), routeData), GetRouteCollection());
         }

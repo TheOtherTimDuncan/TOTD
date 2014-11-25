@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using TOTD.Mvc.FluentHtml;
 using TOTD.Utility.StringHelpers;
 
 namespace TOTD.Test
@@ -20,8 +21,8 @@ namespace TOTD.Test
         {
             ViewContext result = new ViewContext();
 
-            result.RouteData.Values["controller"] = "test";
-            result.RouteData.Values["action"] = "action";
+            result.RouteData.Values[RouteValueKeys.Controller] = "test";
+            result.RouteData.Values[RouteValueKeys.Action] = "action";
             result.Writer = new StringWriter();
             result.HttpContext = GetHttpContext();
             result.RequestContext = new RequestContext(GetHttpContext(), result.RouteData);

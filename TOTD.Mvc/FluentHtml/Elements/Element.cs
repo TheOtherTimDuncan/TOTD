@@ -31,9 +31,9 @@ namespace TOTD.Mvc.FluentHtml.Elements
             this.TagRenderMode = renderMode;
             this.ViewWriter = htmlHelper.ViewContext.Writer;
 
-            this.CurrentArea = (htmlHelper.ViewContext.RouteData.DataTokens[RouteDataKeys.Area] as string) ?? string.Empty; // We need an empty string not null so it will match correctly later
-            this.CurrentControllerName = htmlHelper.ViewContext.RouteData.GetRequiredString(RouteDataKeys.Controller);
-            this.CurrentActionName = htmlHelper.ViewContext.RouteData.GetRequiredString(RouteDataKeys.Action);
+            this.CurrentArea = (htmlHelper.ViewContext.RouteData.DataTokens[RouteValueKeys.Area] as string) ?? string.Empty; // We need an empty string not null so it will match correctly later
+            this.CurrentControllerName = htmlHelper.ViewContext.RouteData.GetRequiredString(RouteValueKeys.Controller);
+            this.CurrentActionName = htmlHelper.ViewContext.RouteData.GetRequiredString(RouteValueKeys.Action);
 
             this._innerHtmlBuilder = new StringBuilder();
             this._elementFactory = new ElementFactory(htmlHelper);

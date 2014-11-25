@@ -6,6 +6,7 @@ using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TODT.Test.Fakes;
 using TOTD.Mvc.Actions;
+using TOTD.Mvc.FluentHtml;
 
 namespace TOTD.Test
 {
@@ -16,25 +17,25 @@ namespace TOTD.Test
         public void DoesNotOverrideAreaIfAlreadyExists()
         {
             RouteValueDictionary routeValues = new RouteValueDictionary();
-            routeValues.Add("area", "NoArea");
+            routeValues.Add(RouteValueKeys.Area, "NoArea");
 
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithArea>(x => x.TestAction(1), routeValues);
 
-            Assert.AreEqual("NoArea", helperResult.RouteValues["area"]);
+            Assert.AreEqual("NoArea", helperResult.RouteValues[RouteValueKeys.Area]);
         }
 
         [TestMethod]
         public void GetsAreaFromAttributeOnController()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithArea>(x => x.TestAction(1));
-            Assert.AreEqual("TestArea", helperResult.RouteValues["area"]);
+            Assert.AreEqual("TestArea", helperResult.RouteValues[RouteValueKeys.Area]);
         }
 
         [TestMethod]
         public void SetsAreaToEmptyStringByDefault()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.OtherAction());
-            Assert.AreEqual("", helperResult.RouteValues["area"]);
+            Assert.AreEqual("", helperResult.RouteValues[RouteValueKeys.Area]);
         }
 
         [TestMethod]
@@ -65,6 +66,21 @@ namespace TOTD.Test
             Assert.IsTrue(helperResult.RouteValues.ContainsKey("actionID"));
             object value = helperResult.RouteValues["actionID"];
             Assert.AreEqual(1, value);
+        }
+
+        [TestMethod]
+        public void CanHandleModelClassAsParameter()
+        {
+            TestModel model = new TestModel()
+            {
+                TestValue = "test"
+            };
+
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.ModelAction(model));
+
+            Assert.IsTrue(helperResult.RouteValues.ContainsKey("TestValue"));
+            object value1 = helperResult.RouteValues["TestValue"];
+            Assert.AreEqual(model.TestValue, value1);
         }
 
         //[TestMethod]

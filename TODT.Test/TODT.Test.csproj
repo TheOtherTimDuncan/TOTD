@@ -96,6 +96,7 @@
     <Compile Include="Actions\ActionHelperTests.cs" />
     <Compile Include="Fakes\TestController.cs" />
     <Compile Include="Fakes\TestControllerWithArea.cs" />
+    <Compile Include="Fakes\TestModel.cs" />
     <Compile Include="FluentHtml\BaseElementTests.cs" />
     <Compile Include="FluentHtml\BaseFormElementTests.cs" />
     <Compile Include="BaseHtmlTest.cs" />

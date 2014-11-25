@@ -110,7 +110,7 @@
     <Compile Include="FluentHtml\Html\HtmlInputType.cs" />
     <Compile Include="FluentHtml\Html\HtmlTag.cs" />
     <Compile Include="FluentHtml\InternalUrlContext.cs" />
-    <Compile Include="FluentHtml\RouteDataKeys.cs" />
+    <Compile Include="RouteValueKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestHelper.cs" />
   </ItemGroup>

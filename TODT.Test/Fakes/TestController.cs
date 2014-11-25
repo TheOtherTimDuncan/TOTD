@@ -31,5 +31,10 @@ namespace TODT.Test.Fakes
         {
             return null;
         }
+
+        public ActionResult ModelAction(TestModel model)
+        {
+            return null;
+        }
     }
 }
