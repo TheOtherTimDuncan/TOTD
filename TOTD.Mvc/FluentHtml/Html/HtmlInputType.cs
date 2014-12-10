@@ -16,7 +16,7 @@ namespace TOTD.Mvc.FluentHtml.Html
         public const string Month = "month";
         public const string Number = "number";
         public const string Password = "password";
-        public static string Radio = "radio";
+        public const string Radio = "radio";
         public const string Range = "range";
         public const string Reset = "reset";
         public const string Submit = "submit";

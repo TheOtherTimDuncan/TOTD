@@ -103,6 +103,7 @@
     <Compile Include="FluentHtml\FormElementTests.cs" />
     <Compile Include="FluentHtml\InputButtonElementTests.cs" />
     <Compile Include="FluentHtml\InputCheckboxElementTests.cs" />
+    <Compile Include="FluentHtml\InputEmailElementTests.cs" />
     <Compile Include="FluentHtml\InputHiddenElementTests.cs" />
     <Compile Include="FluentHtml\InputPasswordElementTests.cs" />
     <Compile Include="FluentHtml\InputRadioElementTests.cs" />
@@ -136,6 +137,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

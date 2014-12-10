@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TODT.Test.Fakes;
 using TOTD.Mvc.Actions;
@@ -81,6 +82,16 @@ namespace TOTD.Test
             Assert.IsTrue(helperResult.RouteValues.ContainsKey("TestValue"));
             object value1 = helperResult.RouteValues["TestValue"];
             Assert.AreEqual(model.TestValue, value1);
+        }
+
+        [TestMethod]
+        public void CanHandleModelClassAsParameterWhenModelIsNull()
+        {
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.ModelAction(null));
+
+            // Only route value value should be area
+            helperResult.RouteValues.Should().HaveCount(1);
+            helperResult.RouteValues[RouteValueKeys.Area].Should().Be(string.Empty);
         }
 
         //[TestMethod]

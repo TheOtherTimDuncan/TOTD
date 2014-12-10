@@ -94,6 +94,7 @@
     <Compile Include="FluentHtml\Elements\FormElement.cs" />
     <Compile Include="FluentHtml\Elements\InputButtonElement.cs" />
     <Compile Include="FluentHtml\Elements\InputCheckboxElement.cs" />
+    <Compile Include="FluentHtml\Elements\InputEmailElement.cs" />
     <Compile Include="FluentHtml\Elements\InputHiddenElement.cs" />
     <Compile Include="FluentHtml\Elements\InputPasswordElement.cs" />
     <Compile Include="FluentHtml\Elements\InputRadioElement.cs" />
@@ -115,7 +116,10 @@
     <Compile Include="UnitTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TOTD.Utility\TOTD.Utility.csproj">
