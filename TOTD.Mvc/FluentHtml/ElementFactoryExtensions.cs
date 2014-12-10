@@ -53,6 +53,11 @@ namespace TOTD.Mvc.FluentHtml
             return elementFactory.CreateElement<InputEmailElement>();
         }
 
+        public static InputEmailElement<T> InputEmail<T>(this ElementFactory<T> elementFactory)
+        {
+            return elementFactory.CreateElement<InputEmailElement<T>>();
+        }
+
         public static InputHiddenElement InputHidden(this ElementFactory elementFactory)
         {
             return elementFactory.CreateElement<InputHiddenElement>();
