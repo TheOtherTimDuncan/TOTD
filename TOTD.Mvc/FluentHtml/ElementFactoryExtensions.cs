@@ -48,6 +48,11 @@ namespace TOTD.Mvc.FluentHtml
             return elementFactory.CreateElement<InputCheckboxElement>();
         }
 
+        public static InputEmailElement InputEmail(this ElementFactory elementFactory)
+        {
+            return elementFactory.CreateElement<InputEmailElement>();
+        }
+
         public static InputHiddenElement InputHidden(this ElementFactory elementFactory)
         {
             return elementFactory.CreateElement<InputHiddenElement>();
