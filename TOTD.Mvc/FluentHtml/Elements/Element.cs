@@ -12,7 +12,7 @@ using TOTD.Mvc.FluentHtml.Html;
 
 namespace TOTD.Mvc.FluentHtml.Elements
 {
-    public class Element<T> : IElement where T : Element<T>, IElement
+    public class Element<T> : IElement where T : Element<T>
     {
         private StringBuilder _innerHtmlBuilder;
         private HtmlHelper _htmlHelper;
