@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TOTD.Mvc.FluentHtml;
 using TOTD.Mvc.FluentHtml.Elements;
 using TOTD.Test.FluentHtml;
-using TOTD.Mvc.FluentHtml;
 
 namespace TODT.Test.FluentHtml
 {
@@ -50,6 +50,16 @@ namespace TODT.Test.FluentHtml
                 .Contain("type=\"email\"")
                 .And
                 .Contain("value=\"StringValue\"");
+        }
+
+        [TestMethod]
+        public void CanBeUsedAsBootstrap()
+        {
+            new InputEmailElement(GetHtmlHelper())
+                .ForBootstrap()
+                .ToHtmlString()
+                .Should()
+                .Contain("class=\"form-control\"");
         }
     }
 }

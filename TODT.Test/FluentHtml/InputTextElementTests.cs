@@ -47,5 +47,15 @@ namespace TOTD.Test.FluentHtml
                 .And
                 .Contain("value=\"StringValue\"");
         }
+
+        [TestMethod]
+        public void CanBeUsedAsBootstrap()
+        {
+            new InputTextElement(GetHtmlHelper())
+                .ForBootstrap()
+                .ToHtmlString()
+                .Should()
+                .Contain("class=\"form-control\"");
+        }
     }
 }
