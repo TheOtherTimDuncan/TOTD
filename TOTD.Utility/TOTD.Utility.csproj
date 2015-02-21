@@ -49,6 +49,8 @@
     <Compile Include="Misc\ShortGuid.cs" />
     <Compile Include="Misc\UnitTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionHelpers\AssemblyExtensions.cs" />
+    <Compile Include="ReflectionHelpers\MemberInfoExtensions.cs" />
     <Compile Include="StringHelpers\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />

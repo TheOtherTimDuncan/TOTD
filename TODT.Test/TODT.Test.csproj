@@ -121,6 +121,7 @@
     <Compile Include="FluentHtml\UrlContextTests.cs" />
     <Compile Include="MvcTests\UnitTestHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionHelperTests\MemberInfoExtensionTests.cs" />
     <Compile Include="UtilityTests\EnumerableExtensionsTests.cs" />
     <Compile Include="UtilityTests\NullHelperTests.cs" />
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />

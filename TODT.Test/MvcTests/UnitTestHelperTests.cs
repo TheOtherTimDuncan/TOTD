@@ -15,12 +15,28 @@ namespace TODT.Test.MvcTests
     public class UnitTestHelperTests
     {
         [TestMethod]
+        public void GetAsyncVoidMethodsReturnsAsyncVoidMethods()
+        {
+            IEnumerable<MethodInfo> methods = UnitTestHelper.GetAsyncVoidMethods(GetType().Assembly);
+            methods.Any(x => x.Name == "BadAsyncMethod").Should().BeTrue();
+            methods.Any(x => x.Name == "GoodAsyncMethod").Should().BeFalse();
+        }
+
+        [TestMethod]
         public void GetControllerActionsMissingValidateAntiForgeryTokenAttributeReturnsPostActionsWithoutAttribute()
         {
             IEnumerable<MethodInfo> actions = UnitTestHelper.GetControllerActionsMissingValidateAntiForgeryTokenAttribute<TestController>();
             actions.Any(x => x.Name == "Get").Should().BeFalse("HttpGet methods should be excluded");
             actions.Any(x => x.Name == "PostWithAntiForgeryToken").Should().BeFalse("action has correct attribute");
             actions.Any(x => x.Name == "PostWithoutAntiForgeryToken").Should().BeTrue("action is missing attribute");
+        }
+
+        private async void BadAsyncMethod()
+        {
+        }
+
+        private async Task GoodAsyncMethod()
+        {
         }
     }
 
