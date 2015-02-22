@@ -104,14 +104,7 @@
     <Compile Include="FluentHtml\BaseFormElementTests.cs" />
     <Compile Include="BaseHtmlTest.cs" />
     <Compile Include="FluentHtml\FormElementTests.cs" />
-    <Compile Include="FluentHtml\InputButtonElementTests.cs" />
-    <Compile Include="FluentHtml\InputCheckboxElementTests.cs" />
-    <Compile Include="FluentHtml\InputEmailElementTests.cs" />
-    <Compile Include="FluentHtml\InputHiddenElementTests.cs" />
-    <Compile Include="FluentHtml\InputPasswordElementTests.cs" />
-    <Compile Include="FluentHtml\InputRadioElementTests.cs" />
-    <Compile Include="FluentHtml\InputSubmitElementTests.cs" />
-    <Compile Include="FluentHtml\InputTextElementTests.cs" />
+    <Compile Include="FluentHtml\InputElementTests.cs" />
     <Compile Include="FluentHtml\LabelElementTests.cs" />
     <Compile Include="FluentHtml\LinkElementTests.cs" />
     <Compile Include="FluentHtml\ListItemTests.cs" />

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using TOTD.Mvc.FluentHtml.Html;
+using TOTD.Utility.ExceptionHelpers;
 
 namespace TOTD.Mvc.FluentHtml.Elements
 {
@@ -31,8 +31,10 @@ namespace TOTD.Mvc.FluentHtml.Elements
             return (T)this;
         }
 
-        protected void SetAttributesFromModelProperty(LambdaExpression expression)
+        protected virtual void SetAttributesFromModelProperty(LambdaExpression expression)
         {
+            ThrowIf.Argument.IsNull(expression, "expression");
+
             string name = GetElementNameFromExpression(expression);
 
             this.Name(name);

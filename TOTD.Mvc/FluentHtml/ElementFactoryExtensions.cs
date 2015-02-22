@@ -38,64 +38,14 @@ namespace TOTD.Mvc.FluentHtml
             return elementFactory.CreateElement<SpanElement>();
         }
 
-        public static InputButtonElement InputButton(this ElementFactory elementFactory)
+        public static InputElement Input(this ElementFactory elementFactory)
         {
-            return elementFactory.CreateElement<InputButtonElement>();
+            return elementFactory.CreateElement<InputElement>();
         }
 
-        public static InputCheckboxElement InputCheckbox(this ElementFactory elementFactory)
+        public static InputElement<T> Input<T>(this ElementFactory<T> elementFactory)
         {
-            return elementFactory.CreateElement<InputCheckboxElement>();
-        }
-
-        public static InputEmailElement InputEmail(this ElementFactory elementFactory)
-        {
-            return elementFactory.CreateElement<InputEmailElement>();
-        }
-
-        public static InputEmailElement<T> InputEmail<T>(this ElementFactory<T> elementFactory)
-        {
-            return elementFactory.CreateElement<InputEmailElement<T>>();
-        }
-
-        public static InputHiddenElement InputHidden(this ElementFactory elementFactory)
-        {
-            return elementFactory.CreateElement<InputHiddenElement>();
-        }
-
-        public static InputHiddenElement<T> InputHidden<T>(this ElementFactory<T> elementFactory)
-        {
-            return elementFactory.CreateElement<InputHiddenElement<T>>();
-        }
-
-        public static InputPasswordElement InputPassword(this ElementFactory elementFactory)
-        {
-            return elementFactory.CreateElement<InputPasswordElement>();
-        }
-
-        public static InputPasswordElement<T> InputPassword<T>(this ElementFactory<T> elementFactory)
-        {
-            return elementFactory.CreateElement<InputPasswordElement<T>>();
-        }
-
-        public static InputRadioElement InputRadio(this ElementFactory elementFactory)
-        {
-            return elementFactory.CreateElement<InputRadioElement>();
-        }
-
-        public static InputSubmitElement InputSubmit(this ElementFactory elementFactory)
-        {
-            return elementFactory.CreateElement<InputSubmitElement>();
-        }
-
-        public static InputTextElement InputText(this ElementFactory elementFactory)
-        {
-            return elementFactory.CreateElement<InputTextElement>();
-        }
-
-        public static InputTextElement<T> InputText<T>(this ElementFactory<T> elementFactory)
-        {
-            return elementFactory.CreateElement<InputTextElement<T>>();
+            return elementFactory.CreateElement<InputElement<T>>();
         }
 
         public static UnorderedListElement UnorderedList(this ElementFactory elementFactory)

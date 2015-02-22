@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using TOTD.Mvc.FluentHtml;
 using TOTD.Mvc.FluentHtml.Elements;
 
 namespace TOTD.Test.FluentHtml
@@ -34,7 +30,7 @@ namespace TOTD.Test.FluentHtml
                 StringProperty = "StringValue"
             };
             ViewDataDictionary<TestModel> viewData = GetViewData(model);
-            new InputTextElement(GetHtmlHelper(viewData))
+            new InputElement(GetHtmlHelper(viewData))
                 .AutoFocus()
                 .ToHtmlString()
                 .Should()
@@ -53,7 +49,7 @@ namespace TOTD.Test.FluentHtml
                 StringProperty = "StringValue"
             };
             ViewDataDictionary<TestModel> viewData = GetViewData(model);
-            new InputTextElement(GetHtmlHelper(viewData))
+            new InputElement(GetHtmlHelper(viewData))
                 .Required()
                 .ToHtmlString()
                 .Should()
@@ -80,6 +76,55 @@ namespace TOTD.Test.FluentHtml
 
             [Display(Name = "Display Label")]
             public string DisplayProperty
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.EmailAddress)]
+            public string Email
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.PhoneNumber)]
+            public string PhoneNumber
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.Password)]
+            public string Password
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.Date)]
+            public string DateValue
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.DateTime)]
+            public string DateTimeValue
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.Time)]
+            public string TimeValue
+            {
+                get;
+                set;
+            }
+
+            [DataType(DataType.Url)]
+            public string Url
             {
                 get;
                 set;

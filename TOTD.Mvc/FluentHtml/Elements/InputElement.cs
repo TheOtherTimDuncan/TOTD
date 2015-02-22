@@ -7,22 +7,22 @@ using TOTD.Mvc.FluentHtml.Html;
 
 namespace TOTD.Mvc.FluentHtml.Elements
 {
-    public class InputTextElement : BaseInputElement<InputTextElement>
+    public class InputElement : BaseInputElement<InputElement>
     {
-        public InputTextElement(HtmlHelper htmlHelper)
+        public InputElement(HtmlHelper htmlHelper)
             : base(HtmlInputType.Text, htmlHelper)
         {
         }
     }
 
-    public class InputTextElement<TModel> : InputTextElement
+    public class InputElement<TModel> : InputElement
     {
-        public InputTextElement(HtmlHelper<TModel> htmlHelper)
+        public InputElement(HtmlHelper<TModel> htmlHelper)
             : base(htmlHelper)
         {
         }
 
-        public InputTextElement For<TProperty>(Expression<Func<TModel, TProperty>> expression)
+        public InputElement For<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
             SetAttributesFromModelProperty(expression);
             return this;
