@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using TOTD.Mvc.FluentHtml.Attributes;
 using TOTD.Mvc.FluentHtml.Html;
 using TOTD.Utility.Misc;
 using TOTD.Utility.ReflectionHelpers;
@@ -93,6 +94,12 @@ namespace TOTD.Mvc.FluentHtml.Elements
                             this.For(HtmlInputType.Number);
                         }
                         break;
+                }
+
+                PlaceholderAttribute placeholderAttribute = memberInfo.GetAttribute<PlaceholderAttribute>();
+                if (placeholderAttribute != null)
+                {
+                    this.Placeholder(placeholderAttribute.Placeholder);
                 }
             }
         }

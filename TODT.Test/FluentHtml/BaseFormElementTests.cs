@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TOTD.Mvc.FluentHtml.Attributes;
 using TOTD.Mvc.FluentHtml.Elements;
 
 namespace TOTD.Test.FluentHtml
@@ -68,6 +69,7 @@ namespace TOTD.Test.FluentHtml
                 set;
             }
 
+            [Placeholder("Placeholder")]
             public string StringProperty
             {
                 get;

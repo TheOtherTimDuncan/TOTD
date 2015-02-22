@@ -223,6 +223,26 @@ namespace TOTD.Test.FluentHtml
         }
 
         [TestMethod]
+        public void SetsPlaceholderValueFromPlaceholderAttribute()
+        {
+            TestModel model = new TestModel();
+
+            ViewDataDictionary<TestModel> viewData = GetViewData(model);
+            HtmlHelper<TestModel> htmlHelper = GetHtmlHelper(viewData);
+            htmlHelper
+                .FluentHtml()
+                .Input()
+                .For(x => x.StringProperty)
+                .ToHtmlString()
+                .Should()
+                .StartWith("<input")
+                .And
+                .EndWith("/>")
+                .And
+                .Contain("placeholder=\"Placeholder\"");
+        }
+
+        [TestMethod]
         public void CanBeUsedAsBootstrap()
         {
             new InputElement(GetHtmlHelper())

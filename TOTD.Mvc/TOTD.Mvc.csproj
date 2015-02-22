@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Actions\ActionExtensions.cs" />
     <Compile Include="Actions\ActionHelper.cs" />
+    <Compile Include="FluentHtml\Attributes\PlaceholderAttribute.cs" />
     <Compile Include="FluentHtml\BootstrapExtensions.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapNav.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapNavItem.cs" />
