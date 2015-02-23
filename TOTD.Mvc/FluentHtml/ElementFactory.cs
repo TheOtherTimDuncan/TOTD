@@ -18,9 +18,10 @@ namespace TOTD.Mvc.FluentHtml
             this._htmlHelper = htmlHelper;
         }
 
-        public virtual ElementType CreateElement<ElementType>() where ElementType : IElement
+        public virtual ElementType CreateElement<ElementType>(params object[] args) where ElementType : IElement
         {
-            ElementType result = (ElementType)Activator.CreateInstance(typeof(ElementType), _htmlHelper);
+            object[] combinedArgs = MergeElementConstructorArguments(args);
+            ElementType result = (ElementType)Activator.CreateInstance(typeof(ElementType), combinedArgs);
             ApplyConventions(result);
             return result;
         }
@@ -37,6 +38,22 @@ namespace TOTD.Mvc.FluentHtml
                 convention.ApplyConvention(element);
             }
         }
+
+        protected object[] MergeElementConstructorArguments(params object[] args)
+        {
+            if (args.Length == 0)
+            {
+                return new[] { _htmlHelper };
+            }
+            else
+            {
+                object[] combinedArgs = new object[args.Length + 1];
+                combinedArgs[0] = _htmlHelper;
+                args.CopyTo(combinedArgs, 1);
+                return combinedArgs;
+            }
+
+        }
     }
 
     public class ElementFactory<ModelType> : ElementFactory
@@ -49,13 +66,13 @@ namespace TOTD.Mvc.FluentHtml
             this._htmlHelper = htmlHelper;
         }
 
-        public override ElementType CreateElement<ElementType>()
+        public override ElementType CreateElement<ElementType>(params object[] args)
         {
-            ElementType result = (ElementType)Activator.CreateInstance(typeof(ElementType), _htmlHelper);
+            object[] combinedArgs = MergeElementConstructorArguments(args);
+            ElementType result = (ElementType)Activator.CreateInstance(typeof(ElementType), combinedArgs);
             ApplyConventions(result);
             return result;
         }
-
     }
 
     public static class ElementFactoryExtension

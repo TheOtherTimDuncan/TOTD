@@ -103,7 +103,10 @@
     <Compile Include="FluentHtml\BaseElementTests.cs" />
     <Compile Include="FluentHtml\BaseFormElementTests.cs" />
     <Compile Include="BaseHtmlTest.cs" />
+    <Compile Include="FluentHtml\BootstrapModalTests.cs" />
+    <Compile Include="FluentHtml\ButtonElementTests.cs" />
     <Compile Include="FluentHtml\FormElementTests.cs" />
+    <Compile Include="FluentHtml\HeadingElementTests.cs" />
     <Compile Include="FluentHtml\InputElementTests.cs" />
     <Compile Include="FluentHtml\LabelElementTests.cs" />
     <Compile Include="FluentHtml\LinkElementTests.cs" />

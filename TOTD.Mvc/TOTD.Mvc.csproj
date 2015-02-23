@@ -77,6 +77,12 @@
     <Compile Include="Actions\ActionHelper.cs" />
     <Compile Include="FluentHtml\Attributes\PlaceholderAttribute.cs" />
     <Compile Include="FluentHtml\BootstrapExtensions.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModalContainer.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModalContent.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModalDialog.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModalFooter.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModalHeader.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModelBody.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapNav.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapNavItem.cs" />
     <Compile Include="FluentHtml\Contracts\IContainerElement.cs" />
@@ -92,8 +98,10 @@
     <Compile Include="FluentHtml\Elements\BaseInputElement.cs" />
     <Compile Include="FluentHtml\Elements\BaseListElement.cs" />
     <Compile Include="FluentHtml\Elements\BaseListItemElement.cs" />
+    <Compile Include="FluentHtml\Elements\ButtonElement.cs" />
     <Compile Include="FluentHtml\Elements\Element.cs" />
     <Compile Include="FluentHtml\Elements\FormElement.cs" />
+    <Compile Include="FluentHtml\Elements\HeadingElement.cs" />
     <Compile Include="FluentHtml\Elements\InputElement.cs" />
     <Compile Include="FluentHtml\Elements\LabelElement.cs" />
     <Compile Include="FluentHtml\Elements\LinkElement.cs" />
@@ -103,6 +111,7 @@
     <Compile Include="FluentHtml\Elements\UnorderedListElement.cs" />
     <Compile Include="FluentHtml\ExternalUrlContext.cs" />
     <Compile Include="FluentHtml\Html\HtmlAttribute.cs" />
+    <Compile Include="FluentHtml\Html\HtmlEntities.cs" />
     <Compile Include="FluentHtml\Html\HtmlInputType.cs" />
     <Compile Include="FluentHtml\Html\HtmlTag.cs" />
     <Compile Include="FluentHtml\InternalUrlContext.cs" />

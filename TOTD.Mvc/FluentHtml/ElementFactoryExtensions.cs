@@ -38,6 +38,11 @@ namespace TOTD.Mvc.FluentHtml
             return elementFactory.CreateElement<SpanElement>();
         }
 
+        public static ButtonElement Button(this ElementFactory elementFactory)
+        {
+            return elementFactory.CreateElement<ButtonElement>();
+        }
+
         public static InputElement Input(this ElementFactory elementFactory)
         {
             return elementFactory.CreateElement<InputElement>();

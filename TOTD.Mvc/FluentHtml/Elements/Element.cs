@@ -117,7 +117,7 @@ namespace TOTD.Mvc.FluentHtml.Elements
         public T Attribute(string name, object value)
         {
             var valueString = value == null ? null : value.ToString();
-            Builder.MergeAttribute(name, valueString, true);
+            Builder.MergeAttribute(name, valueString, replaceExisting: true);
             return (T)this;
         }
 
@@ -142,9 +142,9 @@ namespace TOTD.Mvc.FluentHtml.Elements
             return result;
         }
 
-        protected ElementType CreateElement<ElementType>() where ElementType : IElement
+        protected ElementType CreateElement<ElementType>(params object[] args) where ElementType : IElement
         {
-            return _elementFactory.CreateElement<ElementType>();
+            return _elementFactory.CreateElement<ElementType>(args);
         }
 
         protected virtual void PreRender()
