@@ -7,9 +7,9 @@ using TOTD.Mvc.FluentHtml.Html;
 
 namespace TOTD.Mvc.FluentHtml.Bootstrap
 {
-    public class BootstrapModelBody : BaseContainerElement<BootstrapModelBody>
+    public class BootstrapModalBody : BaseContainerElement<BootstrapModalBody>
     {
-        public BootstrapModelBody(HtmlHelper htmlHelper)
+        public BootstrapModalBody(HtmlHelper htmlHelper)
             : base(HtmlTag.Div, htmlHelper)
         {
             Class("modal-body");

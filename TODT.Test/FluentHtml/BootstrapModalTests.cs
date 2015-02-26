@@ -30,6 +30,9 @@ namespace TODT.Test.FluentHtml
                         using (BootstrapModalHeader header = content.CreateHeader().Begin())
                         {
                         }
+                        using (BootstrapModalBody body = content.CreateBody().Begin())
+                        {
+                        }
                         using (BootstrapModalFooter footer = content.CreateFooter().Begin())
                         {
                         }
@@ -38,7 +41,7 @@ namespace TODT.Test.FluentHtml
             }
 
             string result = builder.ToString();
-            result.Should().Be("<div class=\"modal fade\" tabindex=\"-1\"><div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div><div class=\"modal-footer\"></div></div></div></div>");
+            result.Should().Be("<div class=\"modal fade\" tabindex=\"-1\"><div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div><div class=\"modal-body\"></div><div class=\"modal-footer\"></div></div></div></div>");
         }
 
         [TestMethod]

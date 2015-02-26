@@ -82,7 +82,7 @@
     <Compile Include="FluentHtml\Bootstrap\BootstrapModalDialog.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapModalFooter.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapModalHeader.cs" />
-    <Compile Include="FluentHtml\Bootstrap\BootstrapModelBody.cs" />
+    <Compile Include="FluentHtml\Bootstrap\BootstrapModalBody.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapNav.cs" />
     <Compile Include="FluentHtml\Bootstrap\BootstrapNavItem.cs" />
     <Compile Include="FluentHtml\Contracts\IContainerElement.cs" />

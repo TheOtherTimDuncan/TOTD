@@ -20,6 +20,11 @@ namespace TOTD.Mvc.FluentHtml.Bootstrap
             return CreateElement<BootstrapModalHeader>();
         }
 
+        public BootstrapModalBody CreateBody()
+        {
+            return CreateElement<BootstrapModalBody>();
+        }
+
         public BootstrapModalFooter CreateFooter()
         {
             return CreateElement<BootstrapModalFooter>();
