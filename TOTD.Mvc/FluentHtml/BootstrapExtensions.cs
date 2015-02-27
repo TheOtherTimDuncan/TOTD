@@ -31,7 +31,7 @@ namespace TOTD.Mvc.FluentHtml
 
         public static ButtonElement CanDismissBootstrapModal(this ButtonElement buttonElement)
         {
-            return buttonElement.Data("data-dismiss", "modal");
+            return buttonElement.Data("dismiss", "modal");
         }
 
         public static ButtonElement AsBootstrapPrimary(this ButtonElement buttonElement)

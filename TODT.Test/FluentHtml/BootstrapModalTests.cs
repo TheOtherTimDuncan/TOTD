@@ -55,9 +55,9 @@ namespace TODT.Test.FluentHtml
                 .And
                 .EndWith("</button>")
                 .And
-                .Contain("class=\"close\"")
+                .Contain(" class=\"close\"")
                 .And
-                .Contain("data-dismiss=\"modal\"")
+                .Contain(" data-dismiss=\"modal\"")
                 .And
                 .Contain("&times;");
         }
@@ -73,7 +73,7 @@ namespace TODT.Test.FluentHtml
                 .And
                 .EndWith("</h4>")
                 .And
-                .Contain("class=\"modal-title\"")
+                .Contain(" class=\"modal-title\"")
                 .And
                 .Contain("title");
         }
