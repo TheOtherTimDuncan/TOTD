@@ -133,5 +133,59 @@ namespace TODT.Test.UtilityTests
                     .Be("Test", "original Trim should still work");
             }
         }
+
+        [TestClass]
+        public class SafeSplitWithCharMethod
+        {
+            [TestMethod]
+            public void ReturnsEmptyArrayForNull()
+            {
+                string test = null;
+                Assert.AreEqual(0, test.NullSafeSplit(',').Length);
+            }
+
+            [TestMethod]
+            public void ReturnsArrayFromString()
+            {
+                string test = "1,2";
+                Assert.AreEqual(2, test.NullSafeSplit(',').Length);
+            }
+        }
+
+        [TestClass]
+        public class SafeSplitWithCharAndOptionsMethod
+        {
+            [TestMethod]
+            public void ReturnsEmptyArrayForNull()
+            {
+                string test = null;
+                Assert.AreEqual(0, test.NullSafeSplit(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length);
+            }
+
+            [TestMethod]
+            public void ReturnsArrayFromString()
+            {
+                string test = "1,,2";
+                Assert.AreEqual(2, test.NullSafeSplit(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length);
+            }
+        }
+
+        [TestClass]
+        public class SafeSplitWithStringAndOptionsMethod
+        {
+            [TestMethod]
+            public void ReturnsEmptyArrayForNull()
+            {
+                string test = null;
+                Assert.AreEqual(0, test.NullSafeSplit(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Length);
+            }
+
+            [TestMethod]
+            public void ReturnsArrayFromString()
+            {
+                string test = "1,,2";
+                Assert.AreEqual(2, test.NullSafeSplit(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Length);
+            }
+        }
     }
 }

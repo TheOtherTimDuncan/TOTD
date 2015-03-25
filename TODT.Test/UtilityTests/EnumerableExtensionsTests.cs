@@ -142,6 +142,91 @@ namespace TODT.Test.UtilityTests
         }
 
         [TestClass]
+        public class NullSafeOrderByMethod
+        {
+            [TestMethod]
+            public void ReturnsEmptySequenceIfNull()
+            {
+                IEnumerable<int> test = null;
+                test.NullSafeOrderBy(x => x).Should().BeEmpty();
+            }
+
+            [TestMethod]
+            public void ReturnsSortedSequenceIfNotNull()
+            {
+                new[] { 2, 1, 4, 3, 5 }
+                    .NullSafeOrderBy(x => x)
+                    .Should().Equal(1, 2, 3, 4, 5);
+            }
+        }
+
+        [TestClass]
+        public class NullSafeOrderByDescendingMethod
+        {
+            [TestMethod]
+            public void ReturnsEmptySequenceIfNull()
+            {
+                IEnumerable<int> test = null;
+                test.NullSafeOrderByDescending(x => x).Should().BeEmpty();
+            }
+
+            [TestMethod]
+            public void ReturnsSortedSequenceIfNotNull()
+            {
+                new[] { 2, 1, 4, 3, 5 }
+                    .NullSafeOrderByDescending(x => x)
+                    .Should().Equal(5, 4, 3, 2, 1);
+            }
+        }
+
+        [TestClass]
+        public class NullSafeForEachMethod
+        {
+            [TestMethod]
+            public void DoesNotThrowExceptionForNullSequence()
+            {
+                Action action = () =>
+                {
+                    IEnumerable<int> test = null;
+                    test.NullSafeForEach(x => x = x + 1);
+                };
+                action.ShouldNotThrow();
+            }
+
+            [TestMethod]
+            public void PerformsActionOnSequenceIfNotNull()
+            {
+                int sum = 0;
+                new[] { 1, 2, 3 }.NullSafeForEach(x => sum += x);
+                sum.Should().Be(6);
+            }
+        }
+
+        [TestClass]
+        public class NullSafeJoinMethod
+        {
+            [TestMethod]
+            public void ReturnsNullForNullSequence()
+            {
+                IEnumerable<string> test = null;
+                test.NullSafeJoin(",").Should().BeNull();
+
+            }
+
+            [TestMethod]
+            public void ReturnsEmptyStringForEmptySequence()
+            {
+                new string[] { }.NullSafeJoin(",").Should().BeEmpty();
+            }
+
+            [TestMethod]
+            public void ReturnsJoinedSequenceForNonNullSequence()
+            {
+                new[] { "1", "2" }.NullSafeJoin(",").Should().Be("1,2");
+            }
+        }
+
+        [TestClass]
         public class BatchMethod
         {
             [TestMethod]

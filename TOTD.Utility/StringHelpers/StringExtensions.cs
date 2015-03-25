@@ -64,5 +64,55 @@ namespace TOTD.Utility.StringHelpers
 
             return value.Trim();
         }
+
+        /// <summary>
+        /// Returns a string array that contains the substrings in this instance that are delimited by elements of a specified string or Unicode character array.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="separator"></param>
+        /// <returns>An array whose elements contain the substrings in this instance that are delimited by one or more characters in separator; returns an empty array if value is null</returns>
+        public static string[] NullSafeSplit(this string value, params char[] separator)
+        {
+            if (value == null)
+            {
+                return new string[] { };
+            }
+
+            return value.Split(separator);
+        }
+
+        /// <summary>
+        /// Returns a string array that contains the substrings in this instance that are delimited by elements of a specified string or Unicode character array.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="separator"></param>
+        /// <param name="options"></param>
+        /// <returns>An array whose elements contain the substrings in this instance that are delimited by one or more characters in separator; returns an empty array if value is null</returns>
+        public static string[] NullSafeSplit(this string value, char[] separator, StringSplitOptions options)
+        {
+            if (value == null)
+            {
+                return new string[] { };
+            }
+
+            return value.Split(separator, options);
+        }
+
+        /// <summary>
+        /// Returns a string array that contains the substrings in this instance that are delimited by elements of a specified string or Unicode character array.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="separator"></param>
+        /// <param name="options"></param>
+        /// <returns>An array whose elements contain the substrings in this instance that are delimited by one or more characters in separator; returns an empty array if value is null</returns>
+        public static string[] NullSafeSplit(this string value, string[] separator, StringSplitOptions options)
+        {
+            if (value == null)
+            {
+                return new string[] { };
+            }
+
+            return value.Split(separator, options);
+        }
     }
 }

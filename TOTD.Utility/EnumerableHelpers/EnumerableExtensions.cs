@@ -105,6 +105,77 @@ namespace TOTD.Utility.EnumerableHelpers
             return source.Count();
         }
 
+        /// <summary>
+        /// Sorts the elements of a sequence in ascending order according to a key
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="keySelector"></param>
+        /// <returns>An IEnumerable{TSource} whose elements are sorted according to a key or an empty IEnumerable{TSource} if the source is null</returns>
+        public static IEnumerable<TSource> NullSafeOrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            if (source == null)
+            {
+                return Enumerable.Empty<TSource>();
+            }
+
+            return source.OrderBy(keySelector);
+        }
+
+        /// <summary>
+        /// Sorts the elements of a sequence in descending order according to a key
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="keySelector"></param>
+        /// <returns>An IEnumerable{TSource} whose elements are sorted according to a key or an empty IEnumerable{TSource} if the source is null</returns>
+        public static IEnumerable<TSource> NullSafeOrderByDescending<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            if (source == null)
+            {
+                return Enumerable.Empty<TSource>();
+            }
+
+            return source.OrderByDescending(keySelector);
+        }
+
+        /// <summary>
+        /// Performs the specified action on each element of the given sequence or does nothing the sequence is null
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="action"></param>
+        public static void NullSafeForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
+        {
+            if (source == null)
+            {
+                return;
+            }
+
+            foreach (TSource s in source)
+            {
+                action(s);
+            }
+        }
+
+        /// <summary>
+        /// Concatenates the members of the given sequence using the specified separator between each member
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="separator"></param>
+        /// <returns>A string that consists of the members of the sequence delimited by the separator. Returns null if the sequence is null.</returns>
+        public static string NullSafeJoin(this IEnumerable<string> source, string separator)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+
+            return string.Join(separator, source);
+        }
+
         public static void BatchForEach<TSource>(this IEnumerable<TSource> source, int batchSize, Action<IEnumerable<TSource>> action)
         {
             if(source.IsNullOrEmpty())
