@@ -22,51 +22,62 @@ namespace TOTD.Test
 
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithArea>(x => x.TestAction(1), routeValues);
 
-            Assert.AreEqual("NoArea", helperResult.RouteValues[RouteValueKeys.Area]);
+            helperResult.RouteValues[RouteValueKeys.Area].Should().Be("NoArea");
         }
 
         [TestMethod]
         public void GetsAreaFromAttributeOnController()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestControllerWithArea>(x => x.TestAction(1));
-            Assert.AreEqual("TestArea", helperResult.RouteValues[RouteValueKeys.Area]);
+            helperResult.RouteValues[RouteValueKeys.Area].Should().Be("TestArea");
         }
 
         [TestMethod]
         public void SetsAreaToEmptyStringByDefault()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.OtherAction());
-            Assert.AreEqual("", helperResult.RouteValues[RouteValueKeys.Area]);
+            helperResult.RouteValues[RouteValueKeys.Area].Should().Be("");
         }
 
         [TestMethod]
         public void CanGetControllerNameWithoutControllerSuffixFromActionClass()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction(1));
-            Assert.AreEqual("Test", helperResult.ControllerName);
+            helperResult.ControllerName.Should().Be("Test");
         }
 
         [TestMethod]
         public void CanGetActionNameFromMethod()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction(1));
-            Assert.AreEqual("TestAction", helperResult.ActionName);
+            helperResult.ActionName.Should().Be("TestAction");
         }
 
         [TestMethod]
         public void CanGetActionNameFromAsyncMethod()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestActionAsync(1));
-            Assert.AreEqual("TestActionAsync", helperResult.ActionName);
+            helperResult.ActionName.Should().Be("TestActionAsync");
         }
 
         [TestMethod]
-        public void AddsMethodParametersToRouteValues()
+        public void AddsMethodParameterToRouteValues()
         {
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction(1));
-            Assert.IsTrue(helperResult.RouteValues.ContainsKey("actionID"));
-            object value = helperResult.RouteValues["actionID"];
-            Assert.AreEqual(1, value);
+            helperResult.RouteValues.Should().ContainKey("actionID");
+            helperResult.RouteValues["actionID"].Should().Be(1);
+        }
+
+        [TestMethod]
+        public void AddsMultipleMethodParametersToRouteValues()
+        {
+            ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.TestAction2(1, "test"));
+
+            helperResult.RouteValues.Should().ContainKey("actionID");
+            helperResult.RouteValues.Should().ContainKey("value");
+
+            helperResult.RouteValues["actionID"].Should().Be(1);
+            helperResult.RouteValues["value"].Should().Be("test");
         }
 
         [TestMethod]
@@ -79,9 +90,8 @@ namespace TOTD.Test
 
             ActionHelperResult helperResult = ActionHelper.GetRouteValues<TestController>(x => x.ModelAction(model));
 
-            Assert.IsTrue(helperResult.RouteValues.ContainsKey("TestValue"));
-            object value1 = helperResult.RouteValues["TestValue"];
-            Assert.AreEqual(model.TestValue, value1);
+            helperResult.RouteValues.Should().ContainKey("TestValue");
+            helperResult.RouteValues["TestValue"].Should().Be(model.TestValue);
         }
 
         [TestMethod]

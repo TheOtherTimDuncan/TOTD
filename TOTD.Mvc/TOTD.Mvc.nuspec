@@ -10,4 +10,7 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2014</copyright>
   </metadata>
+  <files>
+	<file src="bin\$configuration$\$id$.pdb" target="lib\net451" />
+  </files>
 </package>

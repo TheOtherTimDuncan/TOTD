@@ -12,6 +12,11 @@ namespace TODT.Test.Fakes
             return null;
         }
 
+        public ActionResult TestAction2(int actionID, string value)
+        {
+            return null;
+        }
+
         public ActionResult FormAction(string returnUrl)
         {
             return null;
