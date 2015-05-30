@@ -134,7 +134,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF "$(ConfigurationName)" == "Release" (  
-  CALL "D:\Apps\nuget\NuGet.exe" pack "$(ProjectDir)$(ProjectFileName)" -Prop Configuration=Release -Prop Platform=AnyCPU -IncludeReferencedProjects -OutputDirectory "D:\Users\Tim\Documents\Visual Studio\Packages" -verbose
+  CALL "$(SolutionDir)\packages\NuGet.CommandLine.2.8.5\tools\NuGet.exe" pack "$(ProjectDir)$(ProjectFileName)" -Prop Configuration=Release -Prop Platform=AnyCPU -IncludeReferencedProjects -OutputDirectory "C:\Users\Tim\Code\Packages" -verbose
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
