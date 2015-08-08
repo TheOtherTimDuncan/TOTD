@@ -31,7 +31,7 @@ namespace TOTD.Utility.EnumerableHelpers
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             return source.Skip((page - 1) * pageSize).Take(pageSize);

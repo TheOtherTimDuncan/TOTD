@@ -35,7 +35,7 @@ namespace TOTD.Utility.Misc
         {
             if (onNotDefault == null)
             {
-                throw new ArgumentNullException("onNotDefault");
+                throw new ArgumentNullException(nameof(onNotDefault));
             }
 
             bool test = (source == null);
