@@ -140,15 +140,19 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void ReturnsEmptyArrayForNull()
             {
-                string test = null;
-                Assert.AreEqual(0, test.NullSafeSplit(',').Length);
+                ((string)null)
+                    .NullSafeSplit(',')
+                    .Should()
+                    .BeEmpty();
             }
 
             [TestMethod]
             public void ReturnsArrayFromString()
             {
-                string test = "1,2";
-                Assert.AreEqual(2, test.NullSafeSplit(',').Length);
+                "1,2"
+                    .NullSafeSplit(',')
+                    .Should()
+                    .Equal(new[] { "1", "2" });
             }
         }
 
@@ -158,15 +162,19 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void ReturnsEmptyArrayForNull()
             {
-                string test = null;
-                Assert.AreEqual(0, test.NullSafeSplit(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length);
+                ((string)null)
+                    .NullSafeSplit(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Should()
+                    .BeEmpty();
             }
 
             [TestMethod]
             public void ReturnsArrayFromString()
             {
-                string test = "1,,2";
-                Assert.AreEqual(2, test.NullSafeSplit(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Length);
+                "1,,2"
+                    .NullSafeSplit(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Should()
+                    .Equal(new[] { "1", "2" });
             }
         }
 
@@ -176,15 +184,19 @@ namespace TODT.Test.UtilityTests
             [TestMethod]
             public void ReturnsEmptyArrayForNull()
             {
-                string test = null;
-                Assert.AreEqual(0, test.NullSafeSplit(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Length);
+                ((string)null)
+                  .NullSafeSplit(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                  .Should()
+                  .BeEmpty();
             }
 
             [TestMethod]
             public void ReturnsArrayFromString()
             {
-                string test = "1,,2";
-                Assert.AreEqual(2, test.NullSafeSplit(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Length);
+                "1,,2"
+                    .NullSafeSplit(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                    .Should()
+                    .Equal(new[] { "1", "2" });
             }
         }
     }
