@@ -199,5 +199,27 @@ namespace TODT.Test.UtilityTests
                     .Equal(new[] { "1", "2" });
             }
         }
+
+        [TestClass]
+        public class EmptyToNullMethod
+        {
+            [TestMethod]
+            public void ReturnsNullForNullValue()
+            {
+                ((string)null).EmptyToNull().Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsNullForEmptyStringValue()
+            {
+                "".EmptyToNull().Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsValueUnchangedIfNotNullOrEmpty()
+            {
+                "test".EmptyToNull().Should().Be("test");
+            }
+        }
     }
 }

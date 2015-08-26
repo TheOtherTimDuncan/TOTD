@@ -114,5 +114,20 @@ namespace TOTD.Utility.StringHelpers
 
             return value.Split(separator, options);
         }
+
+        /// <summary>
+        /// Converts empty string values to null
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Null if the string is null or empty; returns the original value otherwise</returns>
+        public static string EmptyToNull(this string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            return value;
+        }
     }
 }
