@@ -11,17 +11,17 @@ namespace TOTD.EntityFramework
     {
         public static PrimitivePropertyConfiguration HasIndex(this PrimitivePropertyConfiguration configuration)
         {
-            return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute()));
+            return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute()));
         }
 
         public static PrimitivePropertyConfiguration HasIndex(this PrimitivePropertyConfiguration configuration, string name)
         {
-            return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute(name)));
+            return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute(name)));
         }
 
         public static PrimitivePropertyConfiguration HasUniqueIndex(this PrimitivePropertyConfiguration configuration)
         {
-            return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute()
+            return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute()
             {
                 IsUnique = true
             }));
@@ -29,7 +29,7 @@ namespace TOTD.EntityFramework
 
         public static PrimitivePropertyConfiguration HasUniqueIndex(this PrimitivePropertyConfiguration configuration, string name)
         {
-            return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute(name)
+            return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute(name)
             {
                 IsUnique = true
             }));
