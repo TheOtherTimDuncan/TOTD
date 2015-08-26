@@ -52,6 +52,7 @@
     <Compile Include="ReflectionHelpers\AssemblyExtensions.cs" />
     <Compile Include="ReflectionHelpers\MemberInfoExtensions.cs" />
     <Compile Include="StringHelpers\StringExtensions.cs" />
+    <Compile Include="TimespanHelpers\TimespanExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
