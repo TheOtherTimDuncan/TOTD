@@ -40,6 +40,14 @@ namespace TOTD.EntityFramework
             }));
         }
 
+        public static PrimitivePropertyConfiguration HasUniqueIndex(this PrimitivePropertyConfiguration configuration, string name, int order)
+        {
+            return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute(name, order)
+            {
+                IsUnique = true
+            }));
+        }
+
         public static PrimitivePropertyConfiguration IsIdentity(this PrimitivePropertyConfiguration configuration)
         {
             return configuration.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
