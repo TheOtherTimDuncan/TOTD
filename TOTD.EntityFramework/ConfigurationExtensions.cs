@@ -19,6 +19,11 @@ namespace TOTD.EntityFramework
             return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute(name)));
         }
 
+        public static PrimitivePropertyConfiguration HasIndex(this PrimitivePropertyConfiguration configuration, string name, int order)
+        {
+            return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute(name, order)));
+        }
+
         public static PrimitivePropertyConfiguration HasUniqueIndex(this PrimitivePropertyConfiguration configuration)
         {
             return configuration.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute()
@@ -33,6 +38,11 @@ namespace TOTD.EntityFramework
             {
                 IsUnique = true
             }));
+        }
+
+        public static PrimitivePropertyConfiguration IsIdentity(this PrimitivePropertyConfiguration configuration)
+        {
+            return configuration.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }
