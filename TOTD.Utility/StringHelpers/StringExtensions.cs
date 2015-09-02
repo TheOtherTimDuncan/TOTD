@@ -129,5 +129,20 @@ namespace TOTD.Utility.StringHelpers
 
             return value;
         }
+
+        /// <summary>
+        /// Returns a copy of this string converted to uppercase.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>The uppercase equivalent of the current string. Returns null if the current string is null.</returns>
+        public static string NullSafeToUpper(this string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return value;
+            }
+
+            return value.ToUpper();
+        }
     }
 }

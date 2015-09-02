@@ -221,5 +221,21 @@ namespace TODT.Test.UtilityTests
                 "test".EmptyToNull().Should().Be("test");
             }
         }
+
+        [TestClass]
+        public class NullSafeToUpperMethod
+        {
+            [TestMethod]
+            public void ReturnsNullForNullValue()
+            {
+                ((string)null).NullSafeToUpper().Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsValueWithToUppperAppliedIfValueNotNull()
+            {
+                "abc".NullSafeToUpper().Should().Be("ABC");
+            }
+        }
     }
 }
