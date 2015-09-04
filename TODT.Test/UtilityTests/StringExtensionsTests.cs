@@ -237,5 +237,33 @@ namespace TODT.Test.UtilityTests
                 "abc".NullSafeToUpper().Should().Be("ABC");
             }
         }
+
+        [TestClass]
+        public class NullSafeReplaceMethod
+        {
+            [TestMethod]
+            public void ReturnsNullForNullValueWhenReplacingChar()
+            {
+                ((string)null).NullSafeReplace('a', 'b').Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsNullForNullValueWhenReplacingString()
+            {
+                ((string)null).NullSafeReplace("a", "b").Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsStringWithReplacedCharactersIfValueNotNull()
+            {
+                "aabbcc".NullSafeReplace('a', 'z').Should().Be("zzbbcc");
+            }
+
+            [TestMethod]
+            public void ReturnsStringWithReplacedStringsIfValueNotNull()
+            {
+                "aabbcc".NullSafeReplace("aa", "zz").Should().Be("zzbbcc");
+            }
+        }
     }
 }
