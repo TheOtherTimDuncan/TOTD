@@ -13,9 +13,7 @@ namespace TOTD.EntityFramework
     {
         public static void FillWithTestData(DbContext dbContext, object entity, params string[] ignoreProperties)
         {
-            Int16 testInteger = 0;
-            Int32 testLong = 0;
-            Byte testByte = 0;
+            byte number = 1;
             Boolean testBoolean = false;
             DateTime testDate = new DateTime(2000, 1, 1, 1, 1, 1);
             Decimal testDecimal = 1.1m;
@@ -74,24 +72,23 @@ namespace TOTD.EntityFramework
                 }
                 else if (propertyType == typeof(Int16))
                 {
-                    value = testInteger;
-                    testInteger++;
-                    testLong++;
-                    testByte++;
+                    value = Convert.ToInt16(number);
+                    number++;
                 }
                 else if (propertyType == typeof(Int32))
                 {
-                    value = testLong;
-                    testInteger++;
-                    testLong++;
-                    testByte++;
+                    value = Convert.ToInt32(number);
+                    number++;
+                }
+                else if (propertyType == typeof(Int64))
+                {
+                    value = Convert.ToInt64(number);
+                    number++;
                 }
                 else if (propertyType == typeof(Byte))
                 {
-                    value = testByte;
-                    testInteger++;
-                    testLong++;
-                    testByte++;
+                    value = number;
+                    number++;
                 }
                 else if (propertyType == typeof(Boolean))
                 {
