@@ -104,6 +104,18 @@ namespace TOTD.Test
             helperResult.RouteValues[RouteValueKeys.Area].Should().Be(string.Empty);
         }
 
+        [TestMethod]
+        public void GetControllerRouteNameStripsControllerFromControllerName()
+        {
+            ActionHelper.GetControllerRouteName("TestController").Should().Be("Test");
+        }
+
+        [TestMethod]
+        public void GetControllerRouteNameReturnsOriginalNameIfItDoesNotEndWithController()
+        {
+            ActionHelper.GetControllerRouteName("Test").Should().Be("Test");
+        }
+
         //[TestMethod]
         public void TestTiming()
         {

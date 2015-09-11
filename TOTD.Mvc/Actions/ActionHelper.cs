@@ -17,6 +17,23 @@ namespace TOTD.Mvc.Actions
 
         private static ConcurrentDictionary<Type, ControllerContext> cache = new ConcurrentDictionary<Type, ControllerContext>();
 
+        /// <summary>
+        /// Returns the controller name for use with routing by removing Controller from the end
+        /// </summary>
+        /// <param name="controllerName"></param>
+        /// <returns>The controller name with Controller removed from the end, or the full controller name if it does not end with Controller</returns>
+        public static string GetControllerRouteName(string controllerName)
+        {
+            if (controllerName.EndsWith(controllerSuffix))
+            {
+                return controllerName.Substring(0, controllerName.Length - controllerSuffix.Length);
+            }
+            else
+            {
+                return controllerName;
+            }
+        }
+
         public static ActionHelperResult GetRouteValues<T>(Expression<Func<T, ActionResult>> actionSelector) where T : IController
         {
             return GetRouteValues<T>(actionSelector, null);
@@ -70,15 +87,7 @@ namespace TOTD.Mvc.Actions
             }
             else
             {
-                // Controller name is name of controller class with Controller removed from the end if it is there
-                if (controllerType.Name.EndsWith(controllerSuffix))
-                {
-                    result.ControllerName = controllerType.Name.Substring(0, controllerType.Name.Length - controllerSuffix.Length);
-                }
-                else
-                {
-                    result.ControllerName = controllerType.Name;
-                }
+                result.ControllerName = GetControllerRouteName(controllerType.Name);
 
                 // Get the area from the controller if it has the attribute
                 RouteAreaAttribute controllerArea = controllerType.GetCustomAttribute<RouteAreaAttribute>();
