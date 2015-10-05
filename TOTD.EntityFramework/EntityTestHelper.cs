@@ -9,9 +9,9 @@ using System.Reflection;
 
 namespace TOTD.EntityFramework
 {
-    public class EntityTestHelper
+    public static class EntityTestHelper
     {
-        public static void FillWithTestData(DbContext dbContext, object entity, params string[] ignoreProperties)
+        public static void FillWithTestData(this DbContext dbContext, object entity, params string[] ignoreProperties)
         {
             byte number = 1;
             Boolean testBoolean = false;
@@ -118,7 +118,7 @@ namespace TOTD.EntityFramework
             }
         }
 
-        public static EdmProperty GetEntityMetadataProperty<T>(DbContext dbContext, Expression<Func<T, object>> selector)
+        public static EdmProperty GetEntityMetadataProperty<T>(this DbContext dbContext, Expression<Func<T, object>> selector)
         {
             LambdaExpression lambdaExpression = selector as LambdaExpression;
             if (lambdaExpression == null)
@@ -144,7 +144,7 @@ namespace TOTD.EntityFramework
             return GetEntityMetadataProperty(dbContext, typeof(T), memberExpression.Member.Name);
         }
 
-        public static EdmProperty GetEntityMetadataProperty(DbContext dbContext, Type entityType, string propertyName)
+        public static EdmProperty GetEntityMetadataProperty(this DbContext dbContext, Type entityType, string propertyName)
         {
             MetadataWorkspace metadata = ((IObjectContextAdapter)dbContext).ObjectContext.MetadataWorkspace;
 
