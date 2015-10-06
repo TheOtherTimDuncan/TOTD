@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentAssertions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -97,6 +105,11 @@
   <ItemGroup>
     <Compile Include="Actions\ActionExtensionTests.cs" />
     <Compile Include="Actions\ActionHelperTests.cs" />
+    <Compile Include="EntityFramework\EntityFrameworkConfiguration.cs" />
+    <Compile Include="EntityFramework\EntityTestHelperTests.cs" />
+    <Compile Include="EntityFramework\TestAliasedEntity.cs" />
+    <Compile Include="EntityFramework\TestDbContext.cs" />
+    <Compile Include="EntityFramework\TestEntity.cs" />
     <Compile Include="Fakes\TestController.cs" />
     <Compile Include="Fakes\TestControllerWithArea.cs" />
     <Compile Include="Fakes\TestModel.cs" />
@@ -127,6 +140,10 @@
     <Compile Include="UtilityTests\UnitTestHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TOTD.EntityFramework\TOTD.EntityFramework.csproj">
+      <Project>{56941db6-fc49-40d7-b701-3dcbb752572f}</Project>
+      <Name>TOTD.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TOTD.Mvc\TOTD.Mvc.csproj">
       <Project>{922a3fa6-388c-4cfb-8851-d6d6875ddac0}</Project>
       <Name>TOTD.Mvc</Name>
@@ -137,11 +154,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

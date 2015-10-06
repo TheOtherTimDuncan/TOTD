@@ -11,7 +11,17 @@ namespace TOTD.EntityFramework
 {
     public static class EntityTestHelper
     {
-        public static void FillWithTestData(this DbContext dbContext, object entity, params string[] ignoreProperties)
+        private static int _entityID = 1;
+
+        /// <summary>
+        /// Sets the writable properties of the given object to unique values. Numeric properties and DateTime properties have incrementing values.
+        /// String values will be set to the name of the properties right-padded with * up to the configured maximum length of the database column
+        /// Properties configured as identity properties are automatically skipped
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="entity"></param>
+        /// <param name="ignoreProperties">The names of the properties  to not fill with test data</param>
+        public static void FillWithTestData<T>(this DbContext dbContext, T entity, params string[] ignoreProperties)
         {
             byte number = 1;
             Boolean testBoolean = false;
@@ -20,10 +30,25 @@ namespace TOTD.EntityFramework
             Double? testDouble = 1.1f;
             TimeSpan testTimeSpan = TimeSpan.FromHours(1);
 
+            Type entityType = typeof(T);
+
+            List<string> ignores = new List<string>();
+
+            if (ignoreProperties != null)
+            {
+                ignores.AddRange(ignoreProperties);
+            }
+
+            IEnumerable<string> identities = dbContext.GetIdentityPropertyNames<T>();
+            if (identities != null)
+            {
+                ignores.AddRange(identities);
+            }
+
             IEnumerable<PropertyInfo> properties =
-                from p in entity.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                where p.CanWrite && !ignoreProperties.Contains(p.Name)
-                select p;
+              from p in entity.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+              where p.CanWrite && !ignores.Contains(p.Name)
+              select p;
 
             foreach (PropertyInfo property in properties)
             {
@@ -34,10 +59,10 @@ namespace TOTD.EntityFramework
                 {
                     string testString = property.Name;
 
-                    EdmProperty edmProperty = GetEntityMetadataProperty(dbContext, entity.GetType(), property.Name);
+                    EdmProperty edmProperty = GetEntityMetadataProperty(dbContext, entityType, property.Name);
                     if (edmProperty == null)
                     {
-                        throw new Exception("Entity configuration not found for " + entity.GetType().Name + "." + property.Name);
+                        throw new Exception("Entity configuration not found for " + entityType.Name + "." + property.Name);
                     }
 
                     int maxLength;
@@ -49,7 +74,7 @@ namespace TOTD.EntityFramework
                     {
                         if (edmProperty.MaxLength == null)
                         {
-                            throw new Exception("MaxLength not configured for " + entity.GetType().Name + "." + property.Name);
+                            throw new Exception("MaxLength not configured for " + entityType.Name + "." + property.Name);
                         }
                         maxLength = edmProperty.MaxLength.Value;
                     }
@@ -118,6 +143,49 @@ namespace TOTD.EntityFramework
             }
         }
 
+        public static IEnumerable<string> GetKeyPropertyNames<T>(this DbContext dbContext)
+        {
+            return dbContext.GetKeyPropertyNames(typeof(T));
+        }
+
+        public static IEnumerable<string> GetKeyPropertyNames(this DbContext dbContext, Type entityType)
+        {
+            MetadataWorkspace metadata = ((IObjectContextAdapter)dbContext).ObjectContext.MetadataWorkspace;
+
+            IEnumerable<string> keyProperties = metadata.GetItems(DataSpace.OSpace)
+                .Where(x => x.BuiltInTypeKind == BuiltInTypeKind.EntityType)
+                .OfType<EntityType>()
+                .Where(x => x.Name == entityType.Name)
+                .SelectMany(x => x.KeyProperties)
+                .Select(x => x.Name)
+                .Distinct()
+                .ToList();
+
+            return keyProperties;
+        }
+
+        public static IEnumerable<string> GetIdentityPropertyNames<T>(this DbContext dbContext)
+        {
+            return dbContext.GetIdentityPropertyNames(typeof(T));
+        }
+
+        public static IEnumerable<string> GetIdentityPropertyNames(this DbContext dbContext, Type entityType)
+        {
+            MetadataWorkspace metadata = ((IObjectContextAdapter)dbContext).ObjectContext.MetadataWorkspace;
+
+            IEnumerable<string> identityProperties = metadata.GetItems(DataSpace.SSpace)
+                .Where(x => x.BuiltInTypeKind == BuiltInTypeKind.EntityType)
+                .OfType<EntityType>()
+                .Where(x => x.Name == entityType.Name)
+                .SelectMany(x => x.Properties)
+                .Where(x => x.TypeUsage.Facets.Any(f => f.Name == "StoreGeneratedPattern" && ((((StoreGeneratedPattern)f.Value) == StoreGeneratedPattern.Identity) || (((StoreGeneratedPattern)f.Value) == StoreGeneratedPattern.Computed))))
+                .Select(x => x.Name)
+                .Distinct()
+                .ToList();
+
+            return identityProperties;
+        }
+
         public static EdmProperty GetEntityMetadataProperty<T>(this DbContext dbContext, Expression<Func<T, object>> selector)
         {
             LambdaExpression lambdaExpression = selector as LambdaExpression;
@@ -160,6 +228,18 @@ namespace TOTD.EntityFramework
                     .Single();
 
             return edmProperty;
+        }
+
+        public static T SetEntityID<T>(this T source, Expression<Func<T, object>> selector) where T : class
+        {
+            LambdaExpression lambdaExpression = selector as LambdaExpression;
+            MemberExpression memberExpression = (MemberExpression)((UnaryExpression)lambdaExpression.Body).Operand;
+            PropertyInfo property = (PropertyInfo)memberExpression.Member;
+            property.SetValue(source, _entityID);
+
+            _entityID++;
+
+            return source;
         }
     }
 }
