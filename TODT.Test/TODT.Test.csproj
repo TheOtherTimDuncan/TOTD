@@ -128,6 +128,7 @@
     <Compile Include="FluentHtml\SpanElementTests.cs" />
     <Compile Include="FluentHtml\UnorderedListTests.cs" />
     <Compile Include="FluentHtml\UrlContextTests.cs" />
+    <Compile Include="MvcTests\JsonCamelCaseResultTests.cs" />
     <Compile Include="MvcTests\UnitTestHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionHelperTests\MemberInfoExtensionTests.cs" />

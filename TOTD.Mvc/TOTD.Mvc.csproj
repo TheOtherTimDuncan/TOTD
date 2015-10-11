@@ -119,6 +119,7 @@
     <Compile Include="FluentHtml\Html\HtmlInputType.cs" />
     <Compile Include="FluentHtml\Html\HtmlTag.cs" />
     <Compile Include="FluentHtml\InternalUrlContext.cs" />
+    <Compile Include="JsonCamelCaseResult.cs" />
     <Compile Include="JsonStatusCodeResult.cs" />
     <Compile Include="RouteValueKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
