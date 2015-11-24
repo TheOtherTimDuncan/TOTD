@@ -21,11 +21,15 @@ namespace TODT.Test.UtilityTests
             methods.Any(x => x.Name == "GoodAsyncMethod").Should().BeFalse();
         }
 
+#pragma warning disable CS1998 // Needed for unit test
         private async void BadAsyncMethod()
+#pragma warning restore CS1998 
         {
         }
 
+#pragma warning disable CS1998 // Needed for unit test
         private async Task GoodAsyncMethod()
+#pragma warning restore CS1998 
         {
         }
     }

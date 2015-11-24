@@ -32,7 +32,7 @@ namespace TODT.Test.Fakes
             return null;
         }
 
-        public async Task<ActionResult> TestActionAsync(int actionID)
+        public Task<ActionResult> TestActionAsync(int actionID)
         {
             return null;
         }
