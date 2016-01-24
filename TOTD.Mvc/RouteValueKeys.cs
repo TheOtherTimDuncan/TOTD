@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TOTD.Mvc.FluentHtml
+namespace TOTD.Mvc
 {
     public static class RouteValueKeys
     {

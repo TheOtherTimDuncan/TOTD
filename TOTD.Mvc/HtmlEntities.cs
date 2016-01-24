@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace TOTD.Mvc.FluentHtml.Html
+namespace TOTD.Mvc
 {
     public class HtmlEntities
     {

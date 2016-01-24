@@ -6,8 +6,8 @@ using System.Web.Routing;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TODT.Test.Fakes;
+using TOTD.Mvc;
 using TOTD.Mvc.Actions;
-using TOTD.Mvc.FluentHtml;
 
 namespace TOTD.Test
 {

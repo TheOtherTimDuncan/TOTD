@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using TOTD.Mvc.FluentHtml;
+using TOTD.Mvc;
 using TOTD.Utility.StringHelpers;
 
 namespace TOTD.Test
