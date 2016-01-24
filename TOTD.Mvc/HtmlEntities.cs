@@ -1,100 +1,52 @@
 ﻿using System;
 using System.Web;
+using System.Web.Mvc;
 
 namespace TOTD.Mvc
 {
-    public class HtmlEntities
+    public static class HtmlEntities
     {
-        private static HtmlString _ellipsis;
-        private static HtmlString _greaterThan;
-        private static HtmlString _lessThan;
-        private static HtmlString _nonBreakingSpace;
-        private static HtmlString _ampersand;
-        private static HtmlString _quote;
-        private static HtmlString _x;
+        private static HtmlString _ellipsis = new HtmlString("&hellip;");
+        private static HtmlString _greaterThan = new HtmlString("&gt;");
+        private static HtmlString _lessThan = new HtmlString("&lt;");
+        private static HtmlString _nonBreakingSpace = new HtmlString("&nbsp;");
+        private static HtmlString _ampersand = new HtmlString("&amp;");
+        private static HtmlString _quote = new HtmlString("&quot;");
+        private static HtmlString _x = new HtmlString("<span aria-hidden=\"true\">&times;</span>");
 
-        public static HtmlString Ellipsis
+        public static HtmlString Ellipsis(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_ellipsis == null)
-                {
-                    _ellipsis = new HtmlString("&hellip;");
-                }
-                return _ellipsis;
-            }
+            return _ellipsis;
         }
 
-        public static HtmlString GreaterThan
+        public static HtmlString GreaterThan(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_greaterThan == null)
-                {
-                    _greaterThan = new HtmlString("&gt;");
-                }
-                return _greaterThan;
-            }
+            return _greaterThan;
         }
 
-        public static HtmlString LessThan
+        public static HtmlString LessThan(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_lessThan == null)
-                {
-                    _lessThan = new HtmlString("&lt;");
-                }
-                return _lessThan;
-            }
+            return _lessThan;
         }
 
-        public static HtmlString NonBreakingSpace
+        public static HtmlString NonBreakingSpace(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_nonBreakingSpace == null)
-                {
-                    _nonBreakingSpace = new HtmlString("&nbsp;");
-                }
-                return _nonBreakingSpace;
-            }
+            return _nonBreakingSpace;
         }
 
-        public static HtmlString Ampersand
+        public static HtmlString Ampersand(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_ampersand == null)
-                {
-                    _ampersand = new HtmlString("&amp;");
-                }
-                return _ampersand;
-            }
+            return _ampersand;
         }
 
-        public static HtmlString Quote
+        public static HtmlString Quote(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_quote == null)
-                {
-                    _quote = new HtmlString("&quot;");
-                }
-                return _quote;
-            }
+            return _quote;
         }
 
-        public static HtmlString X
+        public static HtmlString X(HtmlHelper htmlHelper)
         {
-            get
-            {
-                if (_x == null)
-                {
-                    _x = new HtmlString("<span aria-hidden=\"true\">&times;</span>");
-                }
-                return _x;
-            }
+            return _x;
         }
     }
 }
