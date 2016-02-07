@@ -55,9 +55,16 @@
     <Compile Include="DbEntityValidationDetailException.cs" />
     <Compile Include="EntityTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryableExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TOTD.Utility\TOTD.Utility.csproj">
+      <Project>{2c03be61-2b30-4517-81ef-0922ce70451d}</Project>
+      <Name>TOTD.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
