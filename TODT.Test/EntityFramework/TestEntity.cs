@@ -83,6 +83,18 @@ namespace TODT.Test.EntityFramework
             set;
         }
 
+        public DateTimeOffset DateTimeOffset1
+        {
+            get;
+            set;
+        }
+
+        public DateTimeOffset DateTimeOffset2
+        {
+            get;
+            set;
+        }
+
         public string AliasedColumn
         {
             get;

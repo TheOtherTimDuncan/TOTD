@@ -55,6 +55,7 @@ namespace TODT.Test.EntityFramework
 
                 testEntity.DateTime1.Should().NotBe(testEntity.DateTime2);
                 testEntity.Decimal1.Should().NotBe(testEntity.Decimal2);
+                testEntity.DateTimeOffset1.Should().NotBe(testEntity.DateTimeOffset2);
 
                 testEntity.AliasedColumn.Should().HaveLength(TestEntity.AliasedColumnLength);
             }

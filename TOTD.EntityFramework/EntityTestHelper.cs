@@ -95,6 +95,11 @@ namespace TOTD.EntityFramework
                     value = testDate;
                     testDate = testDate.AddYears(1).AddMonths(1).AddDays(1).AddHours(1).AddMinutes(1);
                 }
+                else if (propertyType == typeof(DateTimeOffset))
+                {
+                    value = new DateTimeOffset(testDate);
+                    testDate = testDate.AddYears(1).AddMonths(1).AddDays(1).AddHours(1).AddMinutes(1);
+                }
                 else if (propertyType == typeof(Int16))
                 {
                     value = Convert.ToInt16(number);
