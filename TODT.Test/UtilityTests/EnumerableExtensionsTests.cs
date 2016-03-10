@@ -203,6 +203,40 @@ namespace TODT.Test.UtilityTests
         }
 
         [TestClass]
+        public class ForrEachMethod
+        {
+            [TestMethod]
+            public void ThrowsExceptionForNullSequence()
+            {
+                Action action = () =>
+                {
+                    IEnumerable<int> test = null;
+                    test.ForEach(x => x = x + 1);
+                };
+                action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("source");
+            }
+
+            [TestMethod]
+            public void ThrowsExceptionForNullAction()
+            {
+                Action action = () =>
+                {
+                    IEnumerable<int> test = new[] { 1, 2, 3 };
+                    test.ForEach(null);
+                };
+                action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("action");
+            }
+
+            [TestMethod]
+            public void PerformsActionOnSequenceIfNotNull()
+            {
+                int sum = 0;
+                new[] { 1, 2, 3 }.ForEach(x => sum += x);
+                sum.Should().Be(6);
+            }
+        }
+
+        [TestClass]
         public class NullSafeJoinMethod
         {
             [TestMethod]

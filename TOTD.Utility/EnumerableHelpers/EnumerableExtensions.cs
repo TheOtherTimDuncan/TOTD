@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TOTD.Utility.ExceptionHelpers;
 
 namespace TOTD.Utility.EnumerableHelpers
 {
@@ -142,11 +143,29 @@ namespace TOTD.Utility.EnumerableHelpers
         }
 
         /// <summary>
+        /// Performs the specified action on each element of the given sequence
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="action"></param>
+        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
+        {
+            ThrowIf.Argument.IsNull(source, nameof(source));
+            ThrowIf.Argument.IsNull(action, nameof(action));
+
+            foreach (TSource s in source)
+            {
+                action(s);
+            }
+        }
+
+        /// <summary>
         /// Performs the specified action on each element of the given sequence or does nothing the sequence is null
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="action"></param>
+        /// <exception cref="ArgumentNullException">Thrown if action or source is null</exception>
         public static void NullSafeForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
         {
             if (source == null)
@@ -178,7 +197,7 @@ namespace TOTD.Utility.EnumerableHelpers
 
         public static void BatchForEach<TSource>(this IEnumerable<TSource> source, int batchSize, Action<IEnumerable<TSource>> action)
         {
-            if(source.IsNullOrEmpty())
+            if (source.IsNullOrEmpty())
             {
                 return;
             }
