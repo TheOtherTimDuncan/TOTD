@@ -52,5 +52,10 @@ namespace TOTD.EntityFramework
         {
             return configuration.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
+
+        public static PrimitivePropertyConfiguration IsDateOnly(this PrimitivePropertyConfiguration configuration)
+        {
+            return configuration.HasColumnType("Date");
+        }
     }
 }
