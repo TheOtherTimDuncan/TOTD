@@ -77,8 +77,6 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Actions\ActionExtensions.cs" />
-    <Compile Include="Actions\ActionHelper.cs" />
     <Compile Include="AuthorizeRolesAttribute.cs" />
     <Compile Include="HtmlEntities.cs" />
     <Compile Include="JsonCamelCaseResult.cs" />

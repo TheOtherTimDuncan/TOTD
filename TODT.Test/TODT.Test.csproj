@@ -111,8 +111,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Actions\ActionExtensionTests.cs" />
-    <Compile Include="Actions\ActionHelperTests.cs" />
     <Compile Include="EntityFramework\EntityFrameworkConfiguration.cs" />
     <Compile Include="EntityFramework\EntityTestHelperTests.cs" />
     <Compile Include="EntityFramework\TestAliasedEntity.cs" />
