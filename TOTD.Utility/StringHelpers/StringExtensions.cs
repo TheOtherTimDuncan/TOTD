@@ -151,10 +151,10 @@ namespace TOTD.Utility.StringHelpers
         /// <param name="value"></param>
         /// <param name="oldValue"></param>
         /// <param name="newValue"></param>
-        /// <returns
+        /// <returns>
         /// A string that is equivalent to the current string except that all instances of
-        //  oldValue are replaced with newValue. If oldValue is not found in the current
-        //  instance, the method returns the current instance unchanged. Returns null if the current string is null.
+        /// oldValue are replaced with newValue. If oldValue is not found in the current
+        /// instance, the method returns the current instance unchanged. Returns null if the current string is null.
         /// </returns>
         public static string NullSafeReplace(this string value, string oldValue, string newValue)
         {
@@ -172,10 +172,10 @@ namespace TOTD.Utility.StringHelpers
         /// <param name="value"></param>
         /// <param name="oldChar"></param>
         /// <param name="newChar"></param>
-        /// <returns>>
+        /// <returns>
         /// A string that is equivalent to this instance except that all instances of oldChar
-        //  are replaced with newChar. If oldChar is not found in the current instance, the
-        //  method returns the current instance unchanged. Returns null if this string is null.
+        /// are replaced with newChar. If oldChar is not found in the current instance, the
+        /// method returns the current instance unchanged. Returns null if this string is null.
         /// </returns>
         public static string NullSafeReplace(this string value, char oldChar, char newChar)
         {
