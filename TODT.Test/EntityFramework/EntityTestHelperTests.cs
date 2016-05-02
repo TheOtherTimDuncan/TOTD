@@ -60,13 +60,5 @@ namespace TODT.Test.EntityFramework
                 testEntity.AliasedColumn.Should().HaveLength(TestEntity.AliasedColumnLength);
             }
         }
-
-        [TestMethod]
-        public void SetEntityIDSetsSpecifiedPropertiesToUniqueValues()
-        {
-            TestEntity testEntity1 = new TestEntity().SetEntityID(x => x.ID);
-            TestEntity testEntity2 = new TestEntity().SetEntityID(x => x.ID);
-            testEntity1.ID.Should().NotBe(testEntity2.ID);
-        }
     }
 }

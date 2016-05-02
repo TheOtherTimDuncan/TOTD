@@ -11,7 +11,6 @@ namespace TOTD.EntityFramework
 {
     public static class EntityTestHelper
     {
-        private static int _entityID = 1;
 
         /// <summary>
         /// Sets the writable properties of the given object to unique values. Numeric properties and DateTime properties have incrementing values.
@@ -47,7 +46,7 @@ namespace TOTD.EntityFramework
 
             IEnumerable<PropertyInfo> properties =
               from p in entity.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-              where p.CanWrite && !ignores.Contains(p.Name)
+              where p.GetSetMethod() != null && !ignores.Contains(p.Name)
               select p;
 
             foreach (PropertyInfo property in properties)
@@ -235,16 +234,5 @@ namespace TOTD.EntityFramework
             return edmProperty;
         }
 
-        public static T SetEntityID<T>(this T source, Expression<Func<T, object>> selector) where T : class
-        {
-            LambdaExpression lambdaExpression = selector as LambdaExpression;
-            MemberExpression memberExpression = (MemberExpression)((UnaryExpression)lambdaExpression.Body).Operand;
-            PropertyInfo property = (PropertyInfo)memberExpression.Member;
-            property.SetValue(source, _entityID);
-
-            _entityID++;
-
-            return source;
-        }
     }
 }
