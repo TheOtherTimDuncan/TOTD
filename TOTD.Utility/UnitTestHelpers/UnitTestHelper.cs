@@ -11,7 +11,12 @@ namespace TOTD.Utility.UnitTestHelpers
 {
     public static class UnitTestHelper
     {
-        private static byte _testNumber = 1;
+        private static Byte _testNumber = 0;
+        private static Boolean _testBoolean = false;
+        private static DateTime _testDate = new DateTime(2000, 1, 1, 1, 1, 1);
+        private static Decimal _testDecimal = 1.1m;
+        private static Double? _testDouble = 1.1f;
+        private static TimeSpan testTimeSpan = TimeSpan.FromHours(1);
 
         public static IEnumerable<MethodInfo> GetAsyncVoidMethods(Assembly assembly)
         {
@@ -41,16 +46,12 @@ namespace TOTD.Utility.UnitTestHelpers
             }
         }
 
-
         public static T SetEntityID<T>(this T source, Expression<Func<T, object>> selector) where T : class
         {
             LambdaExpression lambdaExpression = selector as LambdaExpression;
             MemberExpression memberExpression = (MemberExpression)((UnaryExpression)lambdaExpression.Body).Operand;
             PropertyInfo property = (PropertyInfo)memberExpression.Member;
-            property.SetValue(source, _testNumber);
-
-            _testNumber++;
-
+            property.SetValue(source, GetNextNumber());
             return source;
         }
 
@@ -62,12 +63,6 @@ namespace TOTD.Utility.UnitTestHelpers
         /// <param name="ignoreProperties">The names of the properties to not fill with test data</param>
         public static T FillWithTestData<T>(this T source, params string[] ignoreProperties) where T : class
         {
-            Boolean testBoolean = false;
-            DateTime testDate = new DateTime(2000, 1, 1, 1, 1, 1);
-            Decimal testDecimal = 1.1m;
-            Double? testDouble = 1.1f;
-            TimeSpan testTimeSpan = TimeSpan.FromHours(1);
-
             List<string> ignores = new List<string>();
 
             if (ignoreProperties != null)
@@ -91,48 +86,42 @@ namespace TOTD.Utility.UnitTestHelpers
                 }
                 else if (propertyType == typeof(DateTime))
                 {
-                    value = testDate;
-                    testDate = testDate.AddYears(1).AddMonths(1).AddDays(1).AddHours(1).AddMinutes(1);
+                    value = GetNextDateTime();
                 }
                 else if (propertyType == typeof(DateTimeOffset))
                 {
-                    value = new DateTimeOffset(testDate);
-                    testDate = testDate.AddYears(1).AddMonths(1).AddDays(1).AddHours(1).AddMinutes(1);
+                    value = new DateTimeOffset(GetNextDateTime());
                 }
                 else if (propertyType == typeof(Int16))
                 {
-                    value = Convert.ToInt16(_testNumber);
-                    _testNumber++;
+                    value = Convert.ToInt16(GetNextNumber());
                 }
                 else if (propertyType == typeof(Int32))
                 {
-                    value = Convert.ToInt32(_testNumber);
-                    _testNumber++;
+                    value = Convert.ToInt32(GetNextNumber());
                 }
                 else if (propertyType == typeof(Int64))
                 {
-                    value = Convert.ToInt64(_testNumber);
-                    _testNumber++;
+                    value = Convert.ToInt64(GetNextNumber());
                 }
                 else if (propertyType == typeof(Byte))
                 {
-                    value = _testNumber;
-                    _testNumber++;
+                    value = GetNextNumber();
                 }
                 else if (propertyType == typeof(Boolean))
                 {
-                    value = testBoolean;
-                    testBoolean = !testBoolean;
+                    value = _testBoolean;
+                    _testBoolean = !_testBoolean;
                 }
                 else if (propertyType == typeof(Decimal))
                 {
-                    value = testDecimal;
-                    testDecimal *= 2;
+                    value = _testDecimal;
+                    _testDecimal *= 2;
                 }
                 else if (propertyType == typeof(Double))
                 {
-                    value = testDouble;
-                    testDouble *= 2;
+                    value = _testDouble;
+                    _testDouble *= 2;
                 }
                 else if (propertyType == typeof(TimeSpan))
                 {
@@ -147,6 +136,25 @@ namespace TOTD.Utility.UnitTestHelpers
             }
 
             return source;
+        }
+
+        public static byte GetNextNumber()
+        {
+            if (_testNumber == Byte.MaxValue)
+            {
+                _testNumber = 1;
+            }
+            else
+            {
+                _testNumber++;
+            }
+            return _testNumber;
+        }
+
+        public static DateTime GetNextDateTime()
+        {
+            _testDate = _testDate.AddYears(1).AddMonths(1).AddDays(1).AddHours(1).AddMinutes(1);
+            return _testDate;
         }
     }
 }
