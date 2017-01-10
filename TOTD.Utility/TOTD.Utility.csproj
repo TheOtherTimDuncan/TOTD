@@ -59,11 +59,13 @@
     <Compile Include="StringHelpers\StringExtensions.cs" />
     <Compile Include="TimespanHelpers\TimespanExtensions.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF "$(ConfigurationName)" == "Release" (  
-  CALL "$(SolutionDir)\packages\NuGet.CommandLine.2.8.5\tools\NuGet.exe" pack "$(ProjectDir)$(ProjectFileName)" -Prop Configuration=Release -Prop Platform=AnyCPU -IncludeReferencedProjects -OutputDirectory "$(SolutionDir)\.vs\PackagesOutput" -verbose
+  CALL "$(SolutionDir)\packages\NuGet.CommandLine.3.5.0\tools\NuGet.exe" pack "$(ProjectDir)$(ProjectFileName)" -Prop Configuration=Release -Prop Platform=AnyCPU -IncludeReferencedProjects -OutputDirectory "C:\Users\tdunc\Code\Packages\Staging" -Verbosity detailed
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
