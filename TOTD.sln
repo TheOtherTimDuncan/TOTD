@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOTD.Utility", "TOTD.Utility\TOTD.Utility.csproj", "{2C03BE61-2B30-4517-81EF-0922CE70451D}"
 EndProject
@@ -13,11 +13,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TODT.Test", "TODT.Test\TODT.Test.csproj", "{8C18E0F0-86DE-4522-8C3B-DD0D7E212593}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOTD.Mvc", "TOTD.Mvc\TOTD.Mvc.csproj", "{922A3FA6-388C-4CFB-8851-D6D6875DDAC0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D101D393-3786-438E-B256-A08ADA00D6EB}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOTD.EntityFramework", "TOTD.EntityFramework\TOTD.EntityFramework.csproj", "{56941DB6-FC49-40D7-B701-3DCBB752572F}"
 EndProject
