@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Company>The Other Tim Duncan</Company>
+    <Product>The Other Tim Duncan</Product>
+    <Copyright>Copyright © 2018</Copyright>
+    <AssemblyVersion>4.3.0</AssemblyVersion>
+    <InformationalVersion>4.3.0</InformationalVersion>
+    <PackageVersion>4.3.0</PackageVersion>
+  </PropertyGroup>
+</Project>

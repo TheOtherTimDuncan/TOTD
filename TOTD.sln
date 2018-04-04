@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOTD.Utility", "TOTD.Utility\TOTD.Utility.csproj", "{2C03BE61-2B30-4517-81EF-0922CE70451D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TOTD.Utility", "TOTD.Utility\TOTD.Utility.csproj", "{2C03BE61-2B30-4517-81EF-0922CE70451D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{B8291862-F1CC-4DD5-B31B-1A338B004179}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
@@ -41,5 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E33CEC14-45BE-4EA9-855D-15A683510A83}
 	EndGlobalSection
 EndGlobal
