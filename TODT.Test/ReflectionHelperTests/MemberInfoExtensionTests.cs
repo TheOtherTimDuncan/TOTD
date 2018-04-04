@@ -39,7 +39,7 @@ namespace TODT.Test.ReflectionHelperTests
                 {
                     DataTypeAttribute attribute = test.GetAttribute<DataTypeAttribute>();
                 };
-                action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("member");
+                action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("member");
             }
 
             [TestMethod]

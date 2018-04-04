@@ -31,7 +31,7 @@ namespace TODT.Test
                 {
                     IQueryable<int> result = test.TakePage(1, 10);
                 };
-                action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("source");
+                action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
             }
         }
 

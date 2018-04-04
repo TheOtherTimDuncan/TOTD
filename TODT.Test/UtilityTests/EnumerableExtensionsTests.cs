@@ -61,7 +61,7 @@ namespace TODT.Test.UtilityTests
                     IEnumerable<int> test = null;
                     IEnumerable<int> result = test.TakePage(1, 10);
                 };
-                testaction.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("source");
+                testaction.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
             }
         }
 
@@ -190,7 +190,7 @@ namespace TODT.Test.UtilityTests
                     IEnumerable<int> test = null;
                     test.NullSafeForEach(x => x = x + 1);
                 };
-                action.ShouldNotThrow();
+                action.Should().NotThrow();
             }
 
             [TestMethod]
@@ -213,7 +213,7 @@ namespace TODT.Test.UtilityTests
                     IEnumerable<int> test = null;
                     test.ForEach(x => x = x + 1);
                 };
-                action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("source");
+                action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
             }
 
             [TestMethod]
@@ -224,7 +224,7 @@ namespace TODT.Test.UtilityTests
                     IEnumerable<int> test = new[] { 1, 2, 3 };
                     test.ForEach(null);
                 };
-                action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("action");
+                action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("action");
             }
 
             [TestMethod]

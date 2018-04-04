@@ -19,7 +19,7 @@ namespace TODT.Test.UtilityTests
                     string argument = "test";
                     ThrowIf.Argument.IsNull(argument, "argument");
                 };
-                action.ShouldNotThrow("test argument is not null");
+                action.Should().NotThrow("test argument is not null");
             }
 
             [TestMethod]
@@ -31,7 +31,7 @@ namespace TODT.Test.UtilityTests
                     ThrowIf.Argument.IsNull(argument, "argument");
                 };
                 action
-                    .ShouldThrow<ArgumentNullException>()
+                    .Should().Throw<ArgumentNullException>()
                     .And
                     .ParamName
                         .Should()
@@ -46,7 +46,7 @@ namespace TODT.Test.UtilityTests
                     string argument = "test";
                     ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
                 };
-                action.ShouldNotThrow("argument has value");
+                action.Should().NotThrow("argument has value");
             }
 
             [TestMethod]
@@ -58,7 +58,7 @@ namespace TODT.Test.UtilityTests
                     ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
                 };
                 action
-                    .ShouldThrow<ArgumentNullException>("argument value is null")
+                    .Should().Throw<ArgumentNullException>("argument value is null")
                     .And
                     .ParamName
                         .Should()
@@ -74,7 +74,7 @@ namespace TODT.Test.UtilityTests
                     ThrowIf.Argument.IsNullOrEmpty(argument, "argument");
                 };
                 action
-                    .ShouldThrow<ArgumentNullException>("argument is empty string")
+                    .Should().Throw<ArgumentNullException>("argument is empty string")
                     .And
                     .ParamName
                         .Should()
@@ -89,7 +89,7 @@ namespace TODT.Test.UtilityTests
                     int argument = 1;
                     ThrowIf.Argument.IsLessThan(argument, "argument", 0);
                 };
-                action.ShouldNotThrow("argument value is not less than limit");
+                action.Should().NotThrow("argument value is not less than limit");
 
             }
 
@@ -101,7 +101,7 @@ namespace TODT.Test.UtilityTests
                     int argument = 0;
                     ThrowIf.Argument.IsLessThan(argument, "argument", 0);
                 };
-                action.ShouldNotThrow("argument value is not less than limit");
+                action.Should().NotThrow("argument value is not less than limit");
             }
 
             [TestMethod]
@@ -113,7 +113,7 @@ namespace TODT.Test.UtilityTests
                     ThrowIf.Argument.IsLessThan(argument, "argument", 0);
                 };
                 action
-                    .ShouldThrow<ArgumentOutOfRangeException>("argument value is less than limit")
+                    .Should().Throw<ArgumentOutOfRangeException>("argument value is less than limit")
                     .And
                     .ParamName
                         .Should()
