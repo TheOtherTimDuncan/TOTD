@@ -91,6 +91,82 @@ namespace TOTD.Utility.EnumerableHelpers
         }
 
         /// <summary>
+        ///  Returns the only element of a sequence, and throws an exception if there is not exactly one element in the sequence.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <returns>
+        /// The single element of the input sequence, or default(TSource) if source is null
+        /// </returns>
+        public static TSource NullSafeSingle<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source == null)
+            {
+                return default(TSource);
+            }
+
+            return source.Single();
+        }
+
+        /// <summary>
+        /// Returns the only element of a sequence that satisfies a specified condition,
+        /// and throws an exception if more than one such element exists.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="predicate"></param>
+        /// <returns>The single element of the input sequence that satisfies a condition, or default(TSource) if source is null</returns>
+        public static TSource NullSafeSingle<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            if (source == null)
+            {
+                return default(TSource);
+            }
+
+            return source.SingleOrDefault(predicate);
+        }
+
+        /// <summary>
+        /// Returns the only element of a sequence, or a default value if the sequence
+        /// is empty; this method throws an exception if there is more than one element
+        /// in the sequence.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <returns>The single element of the input sequence, or default(TSource) if the sequence is null or contains no elements</returns>
+        public static TSource NullSafeSingleOrDefault<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source == null)
+            {
+                return default(TSource);
+            }
+
+            return source.SingleOrDefault();
+        }
+
+        /// <summary>
+        /// Returns the only element of a sequence that satisfies a specified condition
+        /// or a default value if no such element exists; this method throws an exception
+        /// if more than one element satisfies the condition.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="predicate"></param>
+        /// <returns>
+        /// The single element of the input sequence that satisfies the condition, or 
+        /// default(TSource) if no element found or source is null
+        /// </returns>
+        public static TSource NullSafeSingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            if (source == null)
+            {
+                return default(TSource);
+            }
+
+            return source.SingleOrDefault(predicate);
+        }
+
+        /// <summary>
         /// Returns the number of elements in a sequence
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -185,14 +261,26 @@ namespace TOTD.Utility.EnumerableHelpers
         /// <param name="source"></param>
         /// <param name="separator"></param>
         /// <returns>A string that consists of the members of the sequence delimited by the separator. Returns null if the sequence is null.</returns>
-        public static string NullSafeJoin(this IEnumerable<string> source, string separator)
+        public static string NullSafeJoin<T>(this IEnumerable<T> source, string separator)
         {
             if (source == null)
             {
                 return null;
             }
 
-            return string.Join(separator, source);
+            return String.Join(separator, source);
+        }
+
+        /// <summary>
+        /// Concatenates the members of the given sequence using the specified separator between each member
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="separator"></param>
+        /// <returns>A string that consists of the members of the sequence delimited by the separator. Returns String.Empty if the sequence is empty.</returns>
+        /// <exception cref="System.ArgumentNullException">sequence is null</exception>
+        public static string Join<T>(this IEnumerable<T> source, string separator)
+        {
+            return String.Join(separator, source);
         }
 
         public static void BatchForEach<TSource>(this IEnumerable<TSource> source, int batchSize, Action<IEnumerable<TSource>> action)
@@ -210,6 +298,22 @@ namespace TOTD.Utility.EnumerableHelpers
                 skip += batchSize;
                 batch = source.Skip(skip).Take(batchSize);
             }
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form and immediately invokes the projection by calling ToList
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns> 
+        /// A System.Collections.Generic.IEnumerable`1  whose elements are the result of 
+        /// invoking the transform function on each element of source.
+        /// </returns>
+        public static List<TResult> SelectToList<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        {
+            return source.Select(selector).ToList();
         }
     }
 }

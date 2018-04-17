@@ -8,6 +8,7 @@ using FluentAssertions;
 
 namespace TODT.Test.UtilityTests
 {
+    [TestClass]
     public class EnumerableExtensionsTests
     {
         [TestClass]
@@ -203,7 +204,7 @@ namespace TODT.Test.UtilityTests
         }
 
         [TestClass]
-        public class ForrEachMethod
+        public class ForEachMethod
         {
             [TestMethod]
             public void ThrowsExceptionForNullSequence()
@@ -254,9 +255,37 @@ namespace TODT.Test.UtilityTests
             }
 
             [TestMethod]
-            public void ReturnsJoinedSequenceForNonNullSequence()
+            public void ReturnsJoinedSequenceForNonNullStringSequence()
             {
                 new[] { "1", "2" }.NullSafeJoin(",").Should().Be("1,2");
+            }
+
+            [TestMethod]
+            public void ReturnsJoinedSequenceForNonNullIntegerSequence()
+            {
+                new[] { 1, 2 }.NullSafeJoin(",").Should().Be("1,2");
+            }
+        }
+
+        [TestClass]
+        public class JoinMethod
+        {
+            [TestMethod]
+            public void ReturnsEmptyStringForEmptySequence()
+            {
+                new string[] { }.Join(",").Should().BeEmpty();
+            }
+
+            [TestMethod]
+            public void ReturnsJoinedSequenceForNonNullStringSequence()
+            {
+                new[] { "1", "2" }.Join(",").Should().Be("1,2");
+            }
+
+            [TestMethod]
+            public void ReturnsJoinedSequenceForNonNullIntegerSequence()
+            {
+                new[] { 1, 2 }.Join(",").Should().Be("1,2");
             }
         }
 
@@ -300,6 +329,84 @@ namespace TODT.Test.UtilityTests
                     .NullSafeCount()
                     .Should()
                     .Be(3, "original Count still works");
+            }
+        }
+
+        [TestClass]
+        public class NullSafeSingleMethod
+        {
+            [TestMethod]
+            public void ReturnsDefaultForNullSequence()
+            {
+                IEnumerable<string> test = null;
+                test.NullSafeSingle().Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsDefaultForNullSequenceWhenUsingPredicate()
+            {
+                IEnumerable<string> test = null;
+                test.NullSafeSingle(x => x == "test").Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsElementForSequenceWithSingleElement()
+            {
+                new[] { "test" }.NullSafeSingle().Should().Be("test");
+            }
+
+            [TestMethod]
+            public void ReturnsSingleElementForSequenceUsingPredicate()
+            {
+                new[] { "A", "B" }.NullSafeSingle(x => x == "A").Should().Be("A");
+            }
+        }
+
+        [TestClass]
+        public class NullSafeSingleOrDefaultMethod
+        {
+            [TestMethod]
+            public void ReturnsDefaultForNullSequence()
+            {
+                IEnumerable<string> test = null;
+                test.NullSafeSingleOrDefault().Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsDefaultForNullSequenceWhenUsingPredicate()
+            {
+                IEnumerable<string> test = null;
+                test.NullSafeSingleOrDefault(x => x == "test").Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsDefaultForEmptySequence()
+            {
+                new string[] { }.NullSafeSingleOrDefault().Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsDefaultForEmptySequenceWhenUsingPredicate()
+            {
+                new string[] { }.NullSafeSingleOrDefault(x => x == "test").Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsDefaultForSequenceWithNoMatchingElements()
+            {
+                new string[] { "A", "B" }.NullSafeSingleOrDefault(x => x == "test").Should().BeNull();
+            }
+
+            [TestMethod]
+            public void ReturnsElementForSequenceWithSingleElement()
+            {
+                new[] { "test" }.NullSafeSingleOrDefault().Should().Be("test");
+            }
+
+            [TestMethod]
+            public void ReturnsSingleElementForSequenceWithSingleElementWhenUsingPredicate()
+            {
+                new[] { "A", "B" }.NullSafeSingleOrDefault(x => x == "A").Should().Be("A");
             }
         }
     }
