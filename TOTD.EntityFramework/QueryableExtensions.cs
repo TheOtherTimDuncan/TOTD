@@ -36,11 +36,11 @@ namespace TOTD.EntityFramework
         /// <param name="page">The 1-based number of the page to skip to</param>
         /// <param name="pageSize">The number of elements in a page</param>
         /// <returns></returns>
-        public static async Task<IEnumerable<T>> TakePageToListAsync<T>(this IQueryable<T> source, int? page, int pageSize)
+        public static Task<List<T>> TakePageToListAsync<T>(this IQueryable<T> source, int? page, int pageSize)
         {
             ThrowIf.Argument.IsNull(source, "source");
 
-            return await source.TakePage(page, pageSize).ToListAsync();
+            return source.TakePage(page, pageSize).ToListAsync();
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace TOTD.EntityFramework
         /// A System.Linq.IQueryable`1 whose elements are the result of 
         /// invoking the transform function on each element of source.
         /// </returns>
-        public static async Task<IEnumerable<TResult>> SelectToListAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        public static Task<List<TResult>> SelectToListAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
         {
-            return await source.Select(selector).ToListAsync();
+            return source.Select(selector).ToListAsync();
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace TOTD.EntityFramework
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns>The single element of the new form</returns>
-        public static async Task<TResult> SelectSingleAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        public static Task<TResult> SelectSingleAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
         {
-            return await source.Select(selector).SingleAsync();
+            return source.Select(selector).SingleAsync();
         }
 
         /// <summary>
@@ -128,9 +128,9 @@ namespace TOTD.EntityFramework
         /// <param name="source"></param>
         /// <param name="selector"></param>
         /// <returns>The single element of the new form or default(TSource) if the new form is empty</returns>
-        public static async Task<TResult> SelectSingleOrDefaultAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        public static Task<TResult> SelectSingleOrDefaultAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
         {
-            return await source.Select(selector).SingleOrDefaultAsync();
+            return source.Select(selector).SingleOrDefaultAsync();
         }
     }
 }
