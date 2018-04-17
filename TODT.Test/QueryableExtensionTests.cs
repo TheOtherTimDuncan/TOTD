@@ -126,6 +126,50 @@ namespace TODT.Test
         }
 
         [TestClass]
+        public class SelectFirstMethod : QueryableExtensionTests
+        {
+            [TestMethod]
+            public void ReturnsExecutedProjection()
+            {
+                TestEntity testEntity1 = new TestEntity()
+                {
+                    ID = 1,
+                    Name = "name1"
+                };
+
+                TestEntity testEntity2 = new TestEntity()
+                {
+                    ID = 2,
+                    Name = "name2"
+                };
+
+                MockDbSet<TestEntity> mockDbSet = CreateMockDbSet(testEntity1, testEntity2);
+                var result = mockDbSet.Object.Where(x => x.ID == 1).SelectFirst(x => x.ID);
+                result.Should().Be(1);
+            }
+
+            [TestMethod]
+            public async Task ReturnsExecutedProjectionAsynchronously()
+            {
+                TestEntity testEntity1 = new TestEntity()
+                {
+                    ID = 1,
+                    Name = "name1"
+                };
+
+                TestEntity testEntity2 = new TestEntity()
+                {
+                    ID = 2,
+                    Name = "name2"
+                };
+
+                MockDbSet<TestEntity> mockDbSet = CreateMockDbSet(testEntity1, testEntity2);
+                var result = await mockDbSet.Object.Where(x => x.ID == 1).SelectFirstAsync(x => x.ID);
+                result.Should().Be(1);
+            }
+        }
+
+        [TestClass]
         public class SelectSingleOrDefaultMethod : QueryableExtensionTests
         {
             [TestMethod]

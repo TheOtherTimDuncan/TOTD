@@ -75,6 +75,16 @@ namespace TOTD.EntityFramework
             return source.Select(selector).ToListAsync();
         }
 
+        public static List<TSource> SelectAll<TSource>(this IQueryable<TSource> source)
+        {
+            return source.ToList();
+        }
+
+        public static Task<List<TSource>> SelectAllAsync<TSource>(this IQueryable<TSource> source)
+        {
+            return source.ToListAsync();
+        }
+
         /// <summary>
         /// Projects each element of a sequence into a new form and returns the only element from the new form
         /// Throws an exception if there is not exactly one element in the new form
@@ -131,6 +141,60 @@ namespace TOTD.EntityFramework
         public static Task<TResult> SelectSingleOrDefaultAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
         {
             return source.Select(selector).SingleOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form and returns the first element from the new form
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns>The first element of the new form</returns>
+        public static TResult SelectFirst<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        {
+            return source.Select(selector).First();
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form and returns the first element from the new form
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns>The first element of the new form</returns>
+        public static Task<TResult> SelectFirstAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        {
+            return source.Select(selector).FirstAsync();
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form and returns the first element from the new form
+        /// or a default value if the new form is empty
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns>The first element of the new form or default(TSource) if the new form is empty</returns>
+        public static TResult SelectFirstOrDefault<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        {
+            return source.Select(selector).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Projects each element of a sequence into a new form and returns the first element from the new form
+        /// or a default value if the new form is empty
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="selector"></param>
+        /// <returns>The first element of the new form or default(TSource) if the new form is empty</returns>
+        public static Task<TResult> SelectFirstOrDefaultAsync<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        {
+            return source.Select(selector).FirstOrDefaultAsync();
         }
     }
 }
